@@ -16,10 +16,11 @@
 #include <string.h>
 
 int socketServeur(int port){
+	printf("1\n");
 	int ecoute = socket(AF_INET, SOCK_STREAM, 0);
 	struct sockaddr_in sin;
 	sin.sin_family = AF_INET;
-	sin.sin_port = htons(4242);
+	sin.sin_port = htons(7777);
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	bind(ecoute,(struct sockaddr *)&sin,sizeof(sin));
 	listen(ecoute, 5); //écoute de la socket ecoute
@@ -30,10 +31,12 @@ int socketClient(char nomServeur[], int port){
 	int ecoute = socket(AF_INET, SOCK_STREAM, 0);
 	struct sockaddr_in sin;
 	sin.sin_family = AF_INET;
-	sin.sin_port = htons(4242);
+	sin.sin_port = htons(7777);
 	struct hostent *host;
 	host = gethostbyname("localhost");
-	memcpy(&sin.sin_addr.s_addr,host->h_addr_list[0],sizeof(u_long));
+	memcpy(&sin.sin_addr.s_addr,host->h_addr_list[0],sizeof(sin.sin_addr.s_addr));
+	printf("a\n");
 	int echange = connect(ecoute,(struct sockaddr *)&sin,sizeof(sin));
+	fprintf(stdout, "b\n");
 	return echange;
 }

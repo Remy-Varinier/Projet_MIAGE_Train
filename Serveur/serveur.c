@@ -12,12 +12,27 @@
 
 #include "../Common/Headers/reseau.h"
 
-int main(int argc,char *argv[]){ 
-	int ecoute = socketServeur(4242);
-	int echange = accept(ecoute,NULL, NULL);
-	printf("Un client s'est connecté \n");
+int fils(int echange){
 	char tampon[MAX];
-	read(ecoute, tampon, sizeof(ecoute));
-	printf("Un client est connecté \n");
+	do{
+		int lu = read(echange, tampon, MAX);
+		printf("J'ai lu : %s, int : %d\n", tampon, lu);
+	}while(strcmp(tampon,"exit") != 0);
+	exit(0);
+}
+
+int main(int argc,char *argv[]){
+	pid_t id;
+	do{
+		int ecoute = socketServeur(4242);
+		printf("a\n");
+		int echange = accept(ecoute,NULL, NULL);
+		printf("b\n");
+		id = fork();
+		if(id == 0){
+			fils(echange);
+			exit(0);
+		}
+	}while(true);
 	return 0;
 }
