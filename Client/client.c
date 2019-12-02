@@ -15,6 +15,10 @@ int main(int argc,char *argv[]){
 	do{
 		printf("Entrez une ville :\n");
 		fgets(entree, MAX, stdin);
+		int taille = strlen(entree);
+		if(entree[taille-1] == '\n'){
+			entree[taille-1] = '\0';
+		}
 		printf("Ville : %s\n", entree);
 		if(strcmp(entree, "exit") != 0){
 			write(echange, entree, strlen(entree)+1);
