@@ -2,7 +2,7 @@ pathClient = Client/
 pathServeur = Serveur/
 pathCommonSrc = Common/Sources/
 pathCommonHead = Common/Headers/
-pathCommonObj = Common/Objets/
+pathCommonObj = Common/Objects/
 
 all : reseau.o client serveur 
 
