@@ -14,7 +14,7 @@ int main(int argc,char *argv[]){
 	int echange = socketClient("localhost", PORT);
 	do{
 		printf("Entrez une ville :\n");
-		fscanf(stdin, "%s", entree);
+		fgets(entree, MAX, stdin);
 		printf("Ville : %s\n", entree);
 		if(strcmp(entree, "exit") != 0){
 			write(echange, entree, strlen(entree)+1);

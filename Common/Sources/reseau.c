@@ -16,7 +16,6 @@
 #include <string.h>
 
 int socketServeur(int port){
-	printf("1\n");
 	int ecoute = socket(AF_INET, SOCK_STREAM, 0);
 	struct sockaddr_in sin;
 	sin.sin_family = AF_INET;
