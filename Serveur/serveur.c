@@ -8,7 +8,9 @@
 #include <sys/types.h>       
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <sys/uio.h>
 
+#define MAX 100
 
 int main(int argc,char *argv[]){ 
 	/*int ecoute = socket(AF_INET, SOCK_STREAM, 0);
@@ -17,7 +19,7 @@ int main(int argc,char *argv[]){
 	sin.sin_port = htons(7777);
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	bind(ecoute, (struct sockaddr *)&sin, sizeof(sin));
-	listen(ecoute,5);//écoute de la socket */
+	listen(ecoute,5);//écoute de la socket*/
 	int ecoute = socketServeur("localhost",4242);
 	int echange = accept(ecoute,NULL, NULL);
 	printf("Un client s'est connecté \n");
