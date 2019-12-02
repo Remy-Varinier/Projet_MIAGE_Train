@@ -13,13 +13,6 @@
 #include "../Common/Headers/reseau.h"
 
 int main(int argc,char *argv[]){ 
-	/*int ecoute = socket(AF_INET, SOCK_STREAM, 0);
-	struct sockaddr_in sin;
-	sin.sin_family = AF_INET;
-	sin.sin_port = htons(7777);
-	sin.sin_addr.s_addr = htonl(INADDR_ANY);
-	bind(ecoute, (struct sockaddr *)&sin, sizeof(sin));
-	listen(ecoute,5);//écoute de la socket*/
 	int ecoute = socketServeur(4242);
 	int echange = accept(ecoute,NULL, NULL);
 	printf("Un client s'est connecté \n");

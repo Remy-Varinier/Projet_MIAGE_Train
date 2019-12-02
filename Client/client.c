@@ -10,14 +10,6 @@
 #include "../Common/Headers/reseau.h"
 
 int main(int argc,char *argv[]){ 
-	/*int ecoute = socket(AF_INET, SOCK_STREAM, 0);
-	struct sockaddr_in server;
-	server.sin_family = AF_INET;
-	server.sin_port = htons(7777);
-	struct hostent *host;
-	host = gethostbyname("localhost");
-	memcpy(&server.sin_addr.s_addr,host->h_addr_list[0],sizeof(u_long));
-	int echange = connect(ecoute, (struct sockaddr *)&server, sizeof(server));*/
 	int echange = socketClient("localhost",4242);
 	printf("Un client est connecté \n");
 	char *message = "Bonjour";
