@@ -12,7 +12,6 @@
 struct Horaire decoupe_horaire(char *horaire){
 	struct Horaire h;
 	sscanf(horaire,"%d:%d",&h.heure,&h.minute);
-	
 	return h;
 }
 
@@ -51,15 +50,15 @@ struct Train decoupe_ligne(char *ligne_train){
 	return tchouTchou;
 }
 
-int main(int argc, char *argv[]){
-    FILE *fichier = NULL;
-    fichier = fopen("/ext/gourdons/Bureau/Projet_MIAGE_Train/Data/Trains.txt", "r");
+int lecture_fichier(FILE *fichier, struct Train *tab_train){
+    /*FILE *fichier = NULL;
+    fichier = fopen("/ext/gourdons/Bureau/Projet_MIAGE_Train/Data/Trains.txt", "r");*/
     if (fichier != NULL){
 		// On peut lire dans le fichier
-		char line [ 128 ]; /* or other suitable maximum line size */
+		char line [128]; /* or other suitable maximum line size */
         int i = 0;
-		struct Train tab_train[50]; 
-		while ( fgets ( line, sizeof line, fichier ) != NULL ) /* read a line */
+		/*struct Train tab_train[50];*/
+		while (fgets(line, sizeof(line), fichier) != NULL) /* read a line */
 		{
 			 tab_train[i] = decoupe_ligne(line);
 			 printf("num : %d\n", tab_train[i].num_train); 
@@ -75,7 +74,7 @@ int main(int argc, char *argv[]){
 		}
         fclose(fichier);
     }else{
-        // On affiche un message d'erreur
+        // Erreur d'ouverture de fichier
         printf("Impossible d'ouvrir le fichier Trains.txt \n");
     }
     return 0;
