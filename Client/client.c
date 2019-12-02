@@ -20,12 +20,5 @@ int main(int argc,char *argv[]){
 			write(echange, entree, strlen(entree)+1);
 		}
 	}while(strcmp(entree, "exit") != 0);
-		/*
-	printf("Un client est connecté \n");
-	char *message = "Bonjour";
-	write(echange, message, strlen(message)+1);
-	char tampon[MAX];
-	int nbLus = read(echange, tampon, MAX);
-	printf("J'ai lu '%s' \n",tampon);*/
 	return 0;
 }
