@@ -10,16 +10,14 @@
 #include "../Common/Headers/reseau.h"
 
 int main(int argc,char *argv[]){
-	printf("1\n");
 	char entree[MAX];
-	printf("2\n");
-	int echange = socketClient("localhost",4242);
-	printf("3\n");
+	int echange = socketClient("localhost", PORT);
 	do{
 		printf("Entrez une ville :\n");
 		fscanf(stdin, "%s", entree);
+		printf("Ville : %s\n", entree);
 		if(strcmp(entree, "exit") != 0){
-			write(echange, entree, MAX);
+			write(echange, entree, strlen(entree)+1);
 		}
 	}while(strcmp(entree, "exit") != 0);
 		/*
