@@ -18,9 +18,11 @@ int main(int argc,char *argv[]){
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	bind(ecoute, (struct sockaddr *)&sin, sizeof(sin));
 	listen(ecoute,5);//écoute de la socket */
+	int ecoute = socketServeur("localhost",4242);
 	int echange = accept(ecoute,NULL, NULL);
 	printf("Un client s'est connecté \n");
-	read(ecoute, , sizeof(ecoute));
+	char tampon[MAX];
+	read(ecoute, tampon, sizeof(ecoute));
 	printf("Un client est connecté \n");
 	return 0;
 }
