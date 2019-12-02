@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 #include <sys/uio.h>
 
-#define MAX 256               /* Nombre maximum de caractères lus */
+#include "../Common/Headers/reseau.h"
 
 int main(int argc,char *argv[]){ 
 	/*int ecoute = socket(AF_INET, SOCK_STREAM, 0);
@@ -20,7 +20,7 @@ int main(int argc,char *argv[]){
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	bind(ecoute, (struct sockaddr *)&sin, sizeof(sin));
 	listen(ecoute,5);//écoute de la socket*/
-	int ecoute = socketServeur("localhost",4242);
+	int ecoute = socketServeur(4242);
 	int echange = accept(ecoute,NULL, NULL);
 	printf("Un client s'est connecté \n");
 	char tampon[MAX];

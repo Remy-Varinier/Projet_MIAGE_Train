@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <sys/uio.h>
 
-#define MAX 100
+#include "../Common/Headers/reseau.h"
 
 int main(int argc,char *argv[]){ 
 	/*int ecoute = socket(AF_INET, SOCK_STREAM, 0);
