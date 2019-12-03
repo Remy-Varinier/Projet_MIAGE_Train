@@ -10,6 +10,7 @@
 
 #include "../Common/Headers/reseau.h"
 
+// remplacer '\n' par '\0'
 void enleverBack(char *entree){
 	int taille = strlen(entree);
 	if(entree[taille-1] == '\n'){
@@ -17,6 +18,7 @@ void enleverBack(char *entree){
 	}
 }
 
+// lecture de l'entrée du client au clavier
 void lectureClient(char* message, char* res){
 	printf("%s",message);
 	fgets(res, MAX, stdin);
@@ -39,8 +41,7 @@ int main(int argc,char *argv[]){
 	do{
 		msg = "Entrez une ville de départ :\n";
 		lectureClient(msg, ville_depart);
-		
-		
+				
 		msg = "Entrez une ville d'arrivée :\n";
 		lectureClient(msg, ville_arrivee);
 		
