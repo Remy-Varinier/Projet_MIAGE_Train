@@ -15,10 +15,31 @@
 void fils(int echange){
 	printf("une co\n");
 	char tampon[MAX];
+	bool fin = true;
+	char *pv;
+	char commande[4][MAX];
 	do{
 		int lu = read(echange, tampon, MAX);
 		printf("J'ai lu : %s, int : %d\n", tampon, lu);
-	}while(strcmp(tampon,"exit") != 0);	
+		fin = strcmp(tampon,"exit") != 0;
+		if(fin){
+			int i = 0;
+            pv=NULL;
+            i=0;
+            pv = strtok(tampon, ";");
+            
+            //tant que la ligne n'est pas vide
+            while(pv != NULL){
+                strcpy(commande[i],pv);
+                pv = strtok(NULL, ";");
+                i++;
+            }
+            for(int k = 0; k<i;k++){
+				printf("%s\n",commande[k]);
+			}
+        }
+        
+	}while(fin);	
 }
 
 int main(int argc,char *argv[]){
