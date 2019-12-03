@@ -9,6 +9,7 @@
 #include <sys/uio.h>
 
 #include "../Common/Headers/reseau.h"
+#include "gestion_erreur_client.h"
 
 void enleverBack(char *entree){
 	int taille = strlen(entree);
@@ -34,12 +35,12 @@ int main(int argc,char *argv[]){
 	char* entree = (char*) malloc(MAX);
 	int echange = socketClient("localhost", PORT);
 	char *msg = (char*) malloc(MAX);
-	int size; 
+	int size;
+	int err;
 	char pointV[2] = ";";
 	do{
 		msg = "Entrez une ville de départ :\n";
 		lectureClient(msg, ville_depart);
-		
 		
 		msg = "Entrez une ville d'arrivée :\n";
 		lectureClient(msg, ville_arrivee);
@@ -58,8 +59,15 @@ int main(int argc,char *argv[]){
 		
 		if(strcmp(param,"1") == 0){
 			strcat(entree, pointV);
+			
 			msg = "Entrez un horaire de départ : (HH:MM)\n";
 			lectureClient(msg, horaire);
+			err = horaire_valide(horaire);
+			while(err == 0){
+				msg = "Erreur de format\nEntrez a nouveau un horaire de départ : (HH:MM)\n";
+				lectureClient(msg, horaire);
+				err = horaire_valide(horaire);
+			}
 			
 			strcat(entree,horaire);
 			
@@ -67,9 +75,21 @@ int main(int argc,char *argv[]){
 			strcat(entree, pointV);
 			msg = "Entrez un horaire de départ min : (HH:MM)\n";
 			lectureClient(msg, horaire1);
+			err = horaire_valide(horaire1);
+			while(err == 0){
+				msg = "Erreur de format\nEntrez a nouveau un horaire de départ min : (HH:MM)\n";
+				lectureClient(msg, horaire1);
+				err = horaire_valide(horaire1);
+			}
 			
 			msg = "Entrez un horaire de départ max : (HH:MM)\n";
 			lectureClient(msg, horaire2);
+			err = horaire_valide(horaire2);
+			while(err == 0){
+				msg = "Erreur de format\nEntrez a nouveau un horaire de départ max : (HH:MM)\n";
+				lectureClient(msg, horaire2);
+				err = horaire_valide(horaire2);
+			}
 			
 			strcat(entree,horaire1);
 			strcat(entree,pointV);
