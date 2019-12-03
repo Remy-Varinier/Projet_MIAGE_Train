@@ -51,15 +51,14 @@ struct Train decoupe_ligne(char *ligne_train){
 }
 
 int lecture_fichier(FILE *fichier, struct Train *tab_train){
-    /*FILE *fichier = NULL;
-    fichier = fopen("/ext/gourdons/Bureau/Projet_MIAGE_Train/Data/Trains.txt", "r");*/
+    //fichier = NULL;
+    fichier = fopen("/ext/gourdons/Bureau/Projet_MIAGE_Train/Data/Trains.txt", "r");
     if (fichier != NULL){
 		// On peut lire dans le fichier
-		char line [128]; /* or other suitable maximum line size */
+		char line [128]; /* tableau du nombre de ligne maximum */
         int i = 0;
-		/*struct Train tab_train[50];*/
-		while (fgets(line, sizeof(line), fichier) != NULL) /* read a line */
-		{
+        
+		while (fgets(line, sizeof(line), fichier) != NULL) {/* lire une ligne */
 			 tab_train[i] = decoupe_ligne(line);
 			 printf("num : %d\n", tab_train[i].num_train); 
 			 printf("ville depart : %s\n", tab_train[i].ville_dep);
@@ -78,4 +77,11 @@ int lecture_fichier(FILE *fichier, struct Train *tab_train){
         printf("Impossible d'ouvrir le fichier Trains.txt \n");
     }
     return 0;
+}
+
+int main(int argc,char *argv[]){
+	FILE *fichier = NULL;
+	struct Train tab_train[50];
+	lecture_fichier(fichier,tab_train);
+	return 0;
 }
