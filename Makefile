@@ -5,7 +5,7 @@ pathCommonSrc = Common/Sources/
 pathCommonHead = Common/Headers/
 pathCommonObj = Common/Objects/
 
-all : client serveur 
+all : reseau.o client serveur 
 
 client.o : $(pathClient)client.c $(pathCommonHead)reseau.h $(pathClient)gestion_erreur_client.h
 	gcc -c -Wall $(pathClient)client.c -o $(pathClient)client.o
