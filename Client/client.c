@@ -20,9 +20,8 @@ int main(int argc,char *argv[]){
 			entree[taille-1] = '\0';
 		}
 		printf("Ville : %s\n", entree);
-		if(strcmp(entree, "exit") != 0){
-			write(echange, entree, strlen(entree)+1);
-		}
+		write(echange, entree, strlen(entree)+1);
+		
 	}while(strcmp(entree, "exit") != 0);
 	return 0;
 }
