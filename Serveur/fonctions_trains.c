@@ -93,6 +93,7 @@ struct Train duree_optimum(struct TabTrain tab_train){
 		if(dh1>dh2){
 			train = tab_train.trains[i];
 		}
+		i++;
 	}
 	return train;
 }
