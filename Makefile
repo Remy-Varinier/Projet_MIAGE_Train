@@ -1,3 +1,4 @@
+CFLAGS=-std=c99
 pathClient = Client/
 pathServeur = Serveur/
 pathCommonSrc = Common/Sources/
@@ -16,10 +17,10 @@ reseau.o : $(pathCommonSrc)reseau.c
 	gcc -c -Wall $(pathCommonSrc)reseau.c -o $(pathCommonObj)reseau.o
 	
 serveur : $(pathCommonObj)reseau.o $(pathServeur)serveur.o
-	gcc  $(pathCommonObj)reseau.o $(pathServeur)serveur.o -o $(pathServeur)serveur
+	gcc $(pathCommonObj)reseau.o $(pathServeur)serveur.o -o $(pathServeur)serveur
 	
 client : $(pathCommonObj)reseau.o $(pathClient)client.o
-	gcc  $(pathCommonObj)reseau.o $(pathClient)client.o -o $(pathClient)client
+	gcc $(pathCommonObj)reseau.o $(pathClient)client.o -o $(pathClient)client
 	
 clean:
 	rm -rf */*/*.o */*.o $(pathClient)client $(pathServeur)serveur
