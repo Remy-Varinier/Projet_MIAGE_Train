@@ -43,11 +43,7 @@ int main(int argc,char *argv[]){
 	do{
 		msg = "Entrez une ville de départ :\n";
 		lectureClient(msg, ville_depart);
-<<<<<<< HEAD
-		
-=======
-				
->>>>>>> 6e937ea7f718064fac3c6f2c1045aba919c3be94
+
 		msg = "Entrez une ville d'arrivée :\n";
 		lectureClient(msg, ville_arrivee);
 		
