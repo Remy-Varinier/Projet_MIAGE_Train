@@ -1,0 +1,1 @@
+int horaire_valide(char *horaire);
