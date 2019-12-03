@@ -11,6 +11,8 @@
 #include <sys/uio.h>
 
 #include "../Common/Headers/reseau.h"
+#include "serveur.h"
+#include "lire_fichier.h"
 
 void fils(int echange){
 	printf("une co\n");
@@ -34,6 +36,19 @@ void fils(int echange){
                 pv = strtok(NULL, ";");
                 i++;
             }
+            FILE *fichier = NULL;
+			struct TabTrain tab_train;
+			tab_train.taille = 0;
+			
+			lecture_fichier(fichier,&tab_train);
+            switch(i){
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+			}
             for(int k = 0; k<i;k++){
 				printf("%s\n",commande[k]);
 			}

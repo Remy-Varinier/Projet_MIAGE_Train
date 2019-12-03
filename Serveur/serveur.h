@@ -20,7 +20,7 @@ struct Train{
 };
 
 struct TabTrain{ 
-	struct Train trains[MAX_TRAIN];    /* tableau de train trains */
+	struct Train *trains;    /* tableau de train trains */
 	int taille;					/* taille du tableau de train */
 };
 

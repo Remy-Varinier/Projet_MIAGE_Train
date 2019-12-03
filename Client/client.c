@@ -100,5 +100,6 @@ int main(int argc,char *argv[]){
 		enleverBack(arret);
 		
 	}while(strcmp(arret, "Non") != 0);
+	write(echange, "exit", strlen("exit")+1);
 	return 0;
 }
