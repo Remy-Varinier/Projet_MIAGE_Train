@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
-
+#include <string.h>
 #include "serveur.h"
 #include "module_heure.h"
 
@@ -13,7 +13,7 @@ void liste_trains_horaires(struct Train tab_train[], char *ville_depart, char *v
 	int h_d = heureVersMinutes(horaire_depart);
 	int hTrainD;
 	while(tab_train[i].ville_dep != NULL){
-		if(strcmp(&ville_depart, tab_train[i].ville_dep) == 0 && strcmp(ville_arrivee, tab_train[i].ville_arr) == 0){
+		if(strcmp(ville_depart, tab_train[i].ville_dep) == 0 && strcmp(ville_arrivee, tab_train[i].ville_arr) == 0){
 			hTrainD = heureVersMinutes(tab_train[i].h_depart);
 			if(h_d-60 < hTrainD && h_d+60 > hTrainD){
 				tab_res[nbres] = tab_train[i];
