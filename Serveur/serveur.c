@@ -13,6 +13,7 @@
 #include "../Common/Headers/reseau.h"
 #include "serveur.h"
 #include "lire_fichier.h"
+#include "fonctions_trains.h"
 
 void fils(int echange){
 	printf("une co\n");
@@ -39,14 +40,20 @@ void fils(int echange){
             FILE *fichier = NULL;
 			struct TabTrain tab_train;
 			tab_train.taille = 0;
-			
 			lecture_fichier(fichier,&tab_train);
+
+			struct TabTrain tab_res;
+			tab_res.taille = 0;
+
             switch(i){
 				case 2:
+					listBonnesVilles(tab_train, commande[0], commande[1], &tab_res);
 					break;
 				case 3:
+					listHoraire(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), &tab_res);
 					break;
 				case 4:
+					listTrancheHoraire(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), decoupe_horaire(commande[3]), &tab_res);
 					break;
 			}
             for(int k = 0; k<i;k++){
@@ -59,7 +66,7 @@ void fils(int echange){
 
 int main(int argc,char *argv[]){
 	pid_t id;
-	int ecoute = socketServeur(PORT);
+	int ecoute = socketServeur(atoi(argv[1]));
 	do{
 		printf("en attente de co : \n");
 		int echange = accept(ecoute,NULL, NULL);

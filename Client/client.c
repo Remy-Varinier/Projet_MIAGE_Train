@@ -38,7 +38,7 @@ int main(int argc,char *argv[]){
 	int size;
 	int err;
 	char pointV[2] = ";";
-	int echange = socketClient("localhost", PORT);
+	int echange = socketClient(argv[1], atoi(argv[2]));
 	
 	do{
 		msg = "Entrez une ville de départ :\n";

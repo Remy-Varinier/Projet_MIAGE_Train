@@ -8,6 +8,6 @@
 
 // Conversion des heures en minutes
 int heureVersMinutes(struct Horaire h){
-	int minutes = ((h.heure)*60) + (h.minutes);
+	int minutes = ((h.heure)*60) + (h.minute);
 	return minutes;
 }

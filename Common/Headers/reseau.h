@@ -1,5 +1,4 @@
 #define MAX 100
-#define PORT 8002
 
 #ifndef RESEAU_H
 #define RESEAU_H

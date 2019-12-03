@@ -62,7 +62,6 @@ int lecture_fichier(FILE *fichier, struct TabTrain *tab_train){
 		// On peut lire dans le fichier
 		char line [128]; /* tableau du nombre de ligne maximum */
         
-        
 		while (fgets(line, sizeof(line), fichier) != NULL) { /* lire une ligne */
 			 (*tab_train).trains[i] = decoupe_ligne(line);
 			 i++;

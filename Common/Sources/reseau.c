@@ -15,6 +15,8 @@
 #include <netdb.h>
 #include <string.h>
 
+#include "../Headers/reseau.h"
+
 int socketServeur(int port){
 	int ecoute = socket(AF_INET, SOCK_STREAM, 0);
 	struct sockaddr_in sin;
