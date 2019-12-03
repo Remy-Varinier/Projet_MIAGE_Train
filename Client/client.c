@@ -24,7 +24,7 @@ void lectureClient(char* message, char* res){
 }
 
 int main(int argc,char *argv[]){
-	char* arret = "Non";
+	char arret[MAX] = "Non";
 	char* ville_depart = (char*) malloc(MAX);
 	char* ville_arrivee = (char*) malloc(MAX);
 	char* horaire = (char*) malloc(MAX);
@@ -35,7 +35,7 @@ int main(int argc,char *argv[]){
 	int echange = socketClient("localhost", PORT);
 	char *msg = (char*) malloc(MAX);
 	int size; 
-	char pointV[1] = ";";
+	char pointV[2] = ";";
 	do{
 		msg = "Entrez une ville de départ :\n";
 		lectureClient(msg, ville_depart);
@@ -47,24 +47,24 @@ int main(int argc,char *argv[]){
 		size = strlen(entree)+strlen(ville_arrivee)+strlen(ville_arrivee)+3+20;
 		entree = (char*) malloc(size);
 		
-		strcat(entree,ville_arrivee);
-		strcat(entree, pointV);
-		
 		strcat(entree,ville_depart);
 		strcat(entree, pointV);
+		
+		strcat(entree,ville_arrivee);
 		
 		printf("Voulez-vous entrer :\n\tUn horaire de départ ? (1)\n\tUn intervalle pour l'horaire de départ ? (2)\n\tPas de préférence d'horaire ? (0)\n");
 		fgets(param, MAX, stdin);
 		enleverBack(param);
 		
 		if(strcmp(param,"1") == 0){
+			strcat(entree, pointV);
 			msg = "Entrez un horaire de départ : (HH:MM)\n";
 			lectureClient(msg, horaire);
 			
 			strcat(entree,horaire);
-			strcat(entree,pointV);
 			
 		} else if(strcmp(param,"2") == 0){
+			strcat(entree, pointV);
 			msg = "Entrez un horaire de départ min : (HH:MM)\n";
 			lectureClient(msg, horaire1);
 			
@@ -76,11 +76,11 @@ int main(int argc,char *argv[]){
 			
 			strcat(entree,horaire2);
 		}
+		write(echange, entree, strlen(entree)+1);
+		
 		printf("Voulez-vous faire une nouvelle recherche ? (Oui/Non)\n");
 		fgets(arret, MAX, stdin);
 		enleverBack(arret);
-		
-		write(echange, entree, strlen(entree)+1);
 		
 	}while(strcmp(arret, "Non") != 0);
 	return 0;
