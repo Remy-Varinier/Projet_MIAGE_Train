@@ -3,13 +3,13 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-#include "../Headers/fonctions_trains.h"
+#include "fonctions_trains.h"
 
 int liste_trains_ville(struct Train tab_train[], char *ville_depart, char *ville_arrivee, struct Horaire horaire_depart, struct Train tab_res[]){
 	int i = 0;
 	int nbres = 0;
 	while(tab_train[i] != ...){
-		if(strcmp(ville_depart, tab_train[i].ville_dep) == 0 && strcmp(ville_arrivee, tab_train[i].ville_arr) == 0){
+		if(strcmp(ville_depart, tab_train[i].ville_dep) == 0 && strcmp(ville _arrivee, tab_train[i].ville_arr) == 0){
 			tab_res[nbres] = tab_train[i];
 			nbres++;
 		}

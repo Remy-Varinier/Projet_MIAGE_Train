@@ -1,4 +1,5 @@
-#define MAX_CAR 256		      /* Nombre maximum de caractères possible*/
+#define MAX_CAR 100		      /* Nombre maximum de caractères possible*/
+#define MAX_TRAIN 50
 
 struct Horaire{
 	int heure; 
@@ -16,5 +17,10 @@ struct Train{
 								 REDUC si le train bénéficie d'une remise de 20%
 								 SUPPL si le train fait l'objet d'un supplément de 10%
 							   */
+};
+
+struct TabTrain{ 
+	Train trains[MAX_TRAIN];
+	int taille;
 };
 
