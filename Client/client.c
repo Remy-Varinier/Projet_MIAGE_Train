@@ -16,20 +16,30 @@ void enleverBack(char *entree){
 	}
 }
 
+void lectureClient(char* message, char* res){
+	printf("%s",message);
+	fgets(res, MAX, stdin);
+	enleverBack(res);
+}
+
 int main(int argc,char *argv[]){
-	char ville_depart[MAX];
+	char* ville_depart;
 	char ville_arrivee[MAX];
+	char horaire[MAX];
 	char horaire1[MAX];
 	char horaire2[MAX];
 	char *param;
-	char *entree;
+	char *entree = "";
 	int echange = socketClient("localhost", PORT);
+	char *msg; 
+	char pointV[1] = ";";
 	do{
-		printf("Entrez une ville de départ :\n");
-		fgets(ville_depart, MAX, stdin);
-		enleverBack(ville_depart);
+		msg = "Entrez une ville de départ :\n";
+		lectureClient(msg, ville_depart);
 		strcat(entree,ville_depart);
-		strcat(entree,";");
+		strcat(entree,pointV);
+		printf("%s\n",entree);
+		/*
 		printf("Entrez une ville d'arrivée :\n");
 		fgets(ville_arrivee, MAX, stdin);
 		enleverBack(ville_arrivee);
@@ -55,7 +65,7 @@ int main(int argc,char *argv[]){
 			strcat(entree,horaire2);
 		}
 		write(echange, entree, strlen(entree)+1);
-		
+		*/
 	}while(strcmp(entree, "exit") != 0);
 	return 0;
 }
