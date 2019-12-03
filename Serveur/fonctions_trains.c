@@ -7,30 +7,30 @@
 #include "module_heure.h"
 #include "fonctions_trains.h"
 
-int listBonnesVilles(struct Train tabTrain[], int size, char* villeDep, char* villeAr, struct Train res[]){
+void listBonnesVilles(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct TabTrain *res){
 	int compt = 0;
-	for(int i = 0; i < size; i++){
-		if(strcmp(villeDep, tabTrain[i].ville_dep) == 0 && strcmp(villeAr, tabTrain[i].ville_arr) == 0){
-			res[compt] = tabTrain[i];
+	for(int i = 0; i < tabTrain.taille; i++){
+		if(strcmp(villeDep, tabTrain.trains[i].ville_dep) == 0 && strcmp(villeAr, tabTrain.trains[i].ville_arr) == 0){
+			(*res).trains[compt] = tabTrain.trains[i];
 			compt++;
 		}
+		(*res).taille = compt;
 	}
-	return compt;
 }
 
- void triDep(struct Train trains[], int taille)
+ void triDep(struct TabTrain trains)
 {
    struct Horaire temp;
    
-    for(int i = 0; i < taille; i++)
+    for(int i = 0; i < trains.taille; i++)
     {
-        for(int j = 0; j < taille + 2; j++)
+        for(int j = 0; j < trains.taille + 2; j++)
         {
-            if(heureVersMinutes(trains[j].h_depart) > heureVersMinutes(trains[j + 1].h_depart))
+            if(heureVersMinutes(trains.trains[j].h_depart) > heureVersMinutes(trains.trains[j + 1].h_depart))
             {
-                temp = trains[j].h_depart;
-                trains[j].h_depart = trains[j + 1].h_depart;
-                trains[j + 1].h_depart = temp;
+                temp = trains.trains[j].h_depart;
+                trains.trains[j].h_depart = trains.trains[j + 1].h_depart;
+                trains.trains[j + 1].h_depart = temp;
             }
         }
     }
@@ -38,19 +38,19 @@ int listBonnesVilles(struct Train tabTrain[], int size, char* villeDep, char* vi
 
 
 
-int getTrainDep(struct Train tabTrain[], int size, char* villeDep, char* villeAr, struct Horaire hDep, struct Train *train){
-	struct Train trains[size];
-	int taille = listBonnesVilles(tabTrain, size, villeDep, villeAr, trains);
-	triDep(trains, taille);
-	for(int i = 0; i < taille; i++){
-		if( heureVersMinutes(trains[i].h_depart) >= heureVersMinutes(hDep)){
-			*train = trains[i];
+int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct Train *train){
+	struct TabTrain trains;
+	listBonnesVilles(tabTrain, villeDep, villeAr, &trains);
+	triDep(trains);
+	for(int i = 0; i < trains.taille; i++){
+		if( heureVersMinutes(trains.trains[i].h_depart) >= heureVersMinutes(hDep)){
+			*train = trains.trains[i];
 			return EXIT_SUCCESS;
 		}
 	}
 	return EXIT_FAILURE;
 }
-
+	
 double option(struct Train train){
 	double prix, nv_prix;
 	if (strcmp("REDUC",train.option) == 0){
@@ -93,6 +93,7 @@ struct Train duree_optimum(struct TabTrain tab_train){
 		if(dh1>dh2){
 			train = tab_train.trains[i];
 		}
+		i++;
 	}
 	return train;
 }
