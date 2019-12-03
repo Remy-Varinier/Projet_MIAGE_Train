@@ -29,7 +29,6 @@ int main(int argc,char *argv[]){
 		int echange = accept(ecoute,NULL, NULL);
 		printf("connecté : \n");
 		id = fork();
-		
 		if(id == 0){
 			fils(echange);
 			close(ecoute);
