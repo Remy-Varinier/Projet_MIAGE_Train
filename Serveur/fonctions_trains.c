@@ -50,6 +50,52 @@ int getTrainDep(struct Train tabTrain[], int size, char* villeDep, char* villeAr
 	}
 	return EXIT_FAILURE;
 }
+
+double option(struct Train train){
+	double prix, nv_prix;
+	if (strcmp("REDUC",train.option) == 0){
+		prix = train.prix;
+		nv_prix = prix * (80/100);
+	}else{
+		if (strcmp("SUPPL",train.option) == 0){
+			prix = train.prix;
+			nv_prix = prix + (prix * (10/100));
+		}else{
+			nv_prix = train.prix;
+		}
+	}
+	return nv_prix;
+}
+
+struct Train meilleur_prix(struct TabTrain tab_train){
+	int i = 1;
+	struct Train train = tab_train.trains[0];
+	while(i<tab_train.taille){
+		if (train.prix > tab_train.trains[i].prix){
+			train = tab_train.trains[i];
+		}
+		i++;
+	}
+	return train;
+}
+
+struct Train duree_optimum(struct TabTrain tab_train){
+	int i=1;
+	int h1,h2,h3,h4,dh1,dh2;
+	struct Train train = tab_train.trains[0];
+	while(i<tab_train.taille){
+		h1 = heureVersMinutes(train.h_depart);
+		h2 = heureVersMinutes(train.h_arrivee);
+		dh1 = h2 - h1;
+		h3 = heureVersMinutes(tab_train.trains[i].h_depart);
+		h4 = heureVersMinutes(tab_train.trains[i].h_arrivee);
+		dh2 = h4 - h3;
+		if(dh1>dh2){
+			train = tab_train.trains[i];
+		}
+	}
+	return train;
+}
 	
 /*
 int liste_trains_horaires(struct Train tab_train[], char *ville_depart, char *ville_arrivee, struct Horaire horaire_depart , struct Train tab_res[]){
