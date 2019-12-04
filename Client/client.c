@@ -39,6 +39,7 @@ int main(int argc,char *argv[]){
 	char horaire[MAX];
 	char horaire1[MAX];
 	char horaire2[MAX];
+	char trajet[MAX];
 	char param[MAX];
 	char *msg = (char*) malloc(MAX);
 	int size;
@@ -71,9 +72,9 @@ int main(int argc,char *argv[]){
 				lectureClient(msg, horaire);
 				err = horaire_valide(horaire);
 			}
-			
-			sprintf(entree,"%s;%s;%s",ville_depart,ville_arrivee,horaire);
-			
+			msg = "Voulez-vous :\n\tLe trajet au meilleur prix ? (1)\n\tLe trajet de durée optimum ? (2)\n\tTous les trains ? (0)\n";
+			lectureClient(msg, trajet);
+			sprintf(entree,"%s;%s;%s;%s",ville_depart,ville_arrivee,horaire,trajet);
 		} else if(strcmp(param,"2") == 0){
 			msg = "Veuillez entrer un horaire de départ minimum : (HH:MM)\n";
 			lectureClient(msg, horaire1);
@@ -92,9 +93,13 @@ int main(int argc,char *argv[]){
 				lectureClient(msg, horaire2);
 				err = horaire_valide(horaire2);
 			}
-			sprintf(entree,"%s;%s;%s;%s",ville_depart,ville_arrivee,horaire1,horaire2);
+			msg = "Voulez-vous :\n\tLe trajet au meilleur prix ? (1)\n\tLe trajet de durée optimum ? (2)\n\tTous les trains ? (0)\n";
+			lectureClient(msg, trajet);
+			sprintf(entree,"%s;%s;%s;%s;%s",ville_depart,ville_arrivee,horaire1,horaire2,trajet);
 		}else{
-			sprintf(entree,"%s;%s",ville_depart,ville_arrivee);
+			msg = "Voulez-vous :\n\tLe trajet au meilleur prix ? (1)\n\tLe trajet de durée optimum ? (2)\n\tTous les trains ? (0)\n";
+			lectureClient(msg, trajet);
+			sprintf(entree,"%s;%s;%s",ville_depart,ville_arrivee,trajet);
 		}
 		
 		write(echange, entree, strlen(entree)+1);
@@ -106,5 +111,6 @@ int main(int argc,char *argv[]){
 		
 	}while(strcmp(arret, "Non") != 0);
 	write(echange, "exit", strlen("exit")+1);
+	//read();
 	return 0;
 }
