@@ -67,16 +67,6 @@ int lecture_fichier(FILE *fichier, struct TabTrain *tab_train){
         
 		while (fgets(line, sizeof(line), fichier) != NULL) { /* lire une ligne */
 			 (*tab_train).trains[i] = decoupe_ligne(line);
-			 struct Train *t = (*tab_train).trains;
-			 printf("num : %d\n", t[i].num_train); 
-			 printf("ville depart : %s\n", t[i].ville_dep);
-			 printf("ville d'arrivée : %s\n", t[i].ville_arr);
-			 printf("heure départ : %02d", t[i].h_depart.heure);
-			 printf(": %02d\n", t[i].h_depart.minute);
-			 printf("heure d'arrivée : %02d", t[i].h_arrivee.heure);
-			 printf(": %02d\n", t[i].h_arrivee.minute);
-			 printf("prix : %.2f\n", t[i].prix);
-			printf("option : %s\n", t[i].option);
 			 i++;
 		}
         fclose(fichier); /* fermeture du fichier */
