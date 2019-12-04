@@ -7,6 +7,9 @@
 #include "serveur.h"
 #include "fonctions_trains.h"
 
+/* récupère les trains ayant pour ville de départ villeDep 
+ * et pour ville d'arrivée villeAr
+*/
 void listBonnesVilles(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct TabTrain *res){
 	int compt = 0;
 	for(int i = 0; i < tabTrain.taille; i++){
@@ -18,6 +21,7 @@ void listBonnesVilles(struct TabTrain tabTrain, char* villeDep, char* villeAr, s
 	(*res).taille = compt;
 }
 
+/* fonction qui trie les trains dans l'ordre croissant en fonction de l'horaire de départ */
 void triDep(struct TabTrain *trains){
 	struct Train temp;
     for(int i = 0; i < trains->taille; i++){
@@ -31,6 +35,9 @@ void triDep(struct TabTrain *trains){
     }
 }
 
+/* fonction qui renvoit un train satisfaisant certains critères 
+ * ou qui renvoit à défaut le premier train possible à partir de l'horaire de départ demandé
+*/
 int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct TabTrain *train){
 	struct TabTrain trains;
 	listBonnesVilles(tabTrain, villeDep, villeAr, &trains);
@@ -46,6 +53,9 @@ int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct 
 	return EXIT_FAILURE;
 }
 
+/* fonction qui récupère les trains ayant une ville de départ, une ville d'arrivée, 
+ * et une tranche horaire de départ 
+*/
 int getTrainDepArr(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct Horaire hDep2, struct TabTrain* bonTrain){
 	struct TabTrain trains;
 	listBonnesVilles(tabTrain, villeDep, villeAr, &trains);
@@ -60,7 +70,6 @@ int getTrainDepArr(struct TabTrain tabTrain, char* villeDep, char* villeAr, stru
 	bonTrain->taille = k;
 	return EXIT_SUCCESS;;
 }
-
 	
 /* fonction qui calcule le nouveau prix en fonction de l'option demandé:
  * REDUC -> baisse le prix de 20%
