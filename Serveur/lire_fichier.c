@@ -47,8 +47,13 @@ struct Train decoupe_ligne(char *ligne_train){
 				train.prix = atof(pv);
 				break;
 			case 6:
-				if(strcmp(pv,"\n")!=0)
+				if(strcmp(pv,"\n")!=0){
 					strcpy(train.option,pv);
+					int taille = strlen(train.option);
+					if(train.option[taille-1] == '\n'){
+						train.option[taille-1] = '\0';
+					}
+				}
 				break;
 		}
 		pv = strtok(NULL, ";");
