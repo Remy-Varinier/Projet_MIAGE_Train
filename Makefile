@@ -25,11 +25,11 @@ lire_fichier.o : $(pathServeur)lire_fichier.c $(pathServeur)serveur.h $(pathServ
 fonctions_trains.o : $(pathServeur)fonctions_trains.c $(pathServeur)fonctions_trains.h $(pathServeur)serveur.h $(pathServeur)module_heure.h
 	gcc -c -Wall $(pathServeur)fonctions_trains.c -o $(pathServeur)fonctions_trains.o
 
-module_heure.o : $(pathServeur)module_heure.c $(pathServeur)module_heure.h $(pathServeur)serveur.h
+module_heure.o : $(pathServeur)module_heure.c $(pathServeur)serveur.h
 	gcc -c -Wall $(pathServeur)module_heure.c -o $(pathServeur)module_heure.o
 	
-serveur : $(pathCommonObj)reseau.o $(pathServeur)serveur.o $(pathServeur)lire_fichier.o $(pathServeur)fonctions_trains.o
-	gcc $(pathCommonObj)reseau.o $(pathServeur)serveur.o $(pathServeur)lire_fichier.o $(pathServeur)fonctions_trains.o -o $(pathServeur)serveur
+serveur : $(pathCommonObj)reseau.o $(pathServeur)serveur.o $(pathServeur)lire_fichier.o $(pathServeur)fonctions_trains.o $(pathServeur)module_heure.o
+	gcc $(pathCommonObj)reseau.o $(pathServeur)serveur.o $(pathServeur)lire_fichier.o $(pathServeur)fonctions_trains.o $(pathServeur)module_heure.o -o $(pathServeur)serveur
 	
 client : $(pathCommonObj)reseau.o $(pathClient)client.o $(pathClient)gestion_erreur_client.o
 	gcc $(pathCommonObj)reseau.o $(pathClient)gestion_erreur_client.o $(pathClient)client.o -o $(pathClient)client

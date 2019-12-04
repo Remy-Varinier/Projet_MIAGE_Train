@@ -24,3 +24,4 @@ struct TabTrain{
 	int taille;					/* taille du tableau de train */
 };
 
+int heureVersMinutes(struct Horaire h);
