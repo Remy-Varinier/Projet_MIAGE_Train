@@ -43,7 +43,6 @@ int main(int argc,char *argv[]){
 	char *msg = (char*) malloc(MAX);
 	int size;
 	int err;
-	char pointV[2] = ";";
 
 	int echange = socketClient(argv[1], atoi(argv[2]));
 	printf("Cher utilisateur, bienvenue sur la consultation des trains en ligne.\n");
@@ -76,7 +75,6 @@ int main(int argc,char *argv[]){
 			sprintf(entree,"%s;%s;%s",ville_depart,ville_arrivee,horaire);
 			
 		} else if(strcmp(param,"2") == 0){
-			strcat(entree, pointV);
 			msg = "Veuillez entrer un horaire de départ minimum : (HH:MM)\n";
 			lectureClient(msg, horaire1);
 			err = horaire_valide(horaire1);
