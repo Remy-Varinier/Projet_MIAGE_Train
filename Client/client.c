@@ -54,7 +54,6 @@ int main(int argc,char *argv[]){
 		msg = "Entrez une ville d'arrivée :\n";
 		lectureClient(msg, ville_arrivee);
 		
-		
 		size = strlen(ville_depart)+strlen(ville_arrivee)+3+20;
 		char *entree = (char*) malloc(size);
 		
