@@ -33,6 +33,7 @@ int main(int argc,char *argv[]){
 		exit(1);
 	}
 
+	char tampon[MAX];
 	char arret[MAX] = "Non";
 	char ville_depart[MAX];
 	char ville_arrivee[MAX];
@@ -109,8 +110,54 @@ int main(int argc,char *argv[]){
 		fgets(arret, MAX, stdin);
 		enleverBack(arret);
 		
-	}while(strcmp(arret, "Non") != 0);
+	}while(strcmp(arret, "Non") != 0 || strcmp(arret, "non") != 0);
+
 	write(echange, "exit", strlen("exit")+1);
-	//read();
+
+	int lu = read(echange, tampon, MAX);
+
+    char* pv = NULL;
+    char ligneRes[MAX];
+    int i = 0;
+    affichage = strtok(tampon, "!");  
+    //tant que la ligne n'est pas vide
+    while(pv != NULL){
+        strcpy(ligneRes[i],pv);
+        pv = strtok(NULL, "!");
+        i++;
+    }
+    for(int j = 0; j<i; j++){
+    	pv = NULL;
+    	int k = 0;
+    	affichage = strtok(ligneRes[j], ";");  
+    	//tant que la ligne n'est pas vide
+    	while(pv != NULL){
+        	switch(k){
+        		case 0:
+        			printf("Numéro du train : %s\n",pv);
+        			break;
+        		case 1:
+        			printf("Ville de départ : %s\n",pv);
+        			break;
+        		case 2:
+        			printf("Ville d'arrivée : %s\n",pv);
+        			break;
+        		case 3:
+        			printf("Heure de départ : %s\n",pv);
+        			break;
+        		case 4:
+        			printf("Heure d'arrivée : %s\n",pv);
+        			break;
+        		case 5:
+        			printf("Prix du trajet : %s\n",pv);
+        			break;
+        		case 6:
+        			printf("Option (REDUC/SUPPL) : %s\n",pv);
+        			break;
+        	}
+        	pv = strtok(NULL, ";");
+        	k++;
+    	}
+    }
 	return 0;
 }
