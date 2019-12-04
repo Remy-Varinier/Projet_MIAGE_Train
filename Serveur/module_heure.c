@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-#include "module_heure.h"
 #include "serveur.h"
+
 
 // Conversion des heures en minutes
 int heureVersMinutes(struct Horaire h){
