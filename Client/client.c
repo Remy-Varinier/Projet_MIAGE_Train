@@ -27,6 +27,12 @@ void lectureClient(char* message, char* res){
 }
 
 int main(int argc,char *argv[]){
+
+	if(argc < 3){
+		printf("Erreur d'usage : client serveur port\n");
+		exit(1);
+	}
+
 	char arret[MAX] = "Non";
 	char ville_depart[MAX];
 	char ville_arrivee[MAX];
@@ -38,6 +44,7 @@ int main(int argc,char *argv[]){
 	int size;
 	int err;
 	char pointV[2] = ";";
+
 	int echange = socketClient(argv[1], atoi(argv[2]));
 	
 	do{
