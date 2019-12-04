@@ -11,3 +11,11 @@ int heureVersMinutes(struct Horaire h){
 	int minutes = ((h.heure)*60) + (h.minute);
 	return minutes;
 }
+
+// Conversion des minutes en heures
+struct Horaire heureVersMinutes(int minute){
+	struct Horaire h;
+	h.heure =(minute/60);
+	h.minute =(minute%60);
+	return heure;
+}
