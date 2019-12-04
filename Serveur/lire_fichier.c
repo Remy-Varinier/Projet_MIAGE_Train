@@ -23,6 +23,7 @@ struct Train decoupe_ligne(char *ligne_train){
 	char *pv=NULL;
 	int i=0;
 	struct Train train;
+	strcpy(train.option,"NULL");
 	pv = strtok(ligne_train, ";");
 	//tant que la ligne n'est pas vide
 	while(pv != NULL){
@@ -46,7 +47,13 @@ struct Train decoupe_ligne(char *ligne_train){
 				train.prix = atof(pv);
 				break;
 			case 6:
-				strcpy(train.option,pv);
+				if(strcmp(pv,"\n")!=0){
+					strcpy(train.option,pv);
+					int taille = strlen(train.option);
+					if(train.option[taille-1] == '\n'){
+						train.option[taille-1] = '\0';
+					}
+				}
 				break;
 		}
 		pv = strtok(NULL, ";");
