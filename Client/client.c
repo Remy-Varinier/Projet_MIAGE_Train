@@ -116,46 +116,46 @@ int main(int argc,char *argv[]){
 
 	int lu = read(echange, tampon, MAX);
 
-    char* pv = NULL;
+    char* affichage = NULL;
     char ligneRes[MAX];
     int i = 0;
     affichage = strtok(tampon, "!");  
     //tant que la ligne n'est pas vide
-    while(pv != NULL){
-        strcpy(ligneRes[i],pv);
-        pv = strtok(NULL, "!");
+    while(affichage != NULL){
+        strcpy(ligneRes[i],affichage);
+        affichage = strtok(NULL, "!");
         i++;
     }
     for(int j = 0; j<i; j++){
-    	pv = NULL;
+    	affichage = NULL;
     	int k = 0;
     	affichage = strtok(ligneRes[j], ";");  
     	//tant que la ligne n'est pas vide
-    	while(pv != NULL){
+    	while(affichage != NULL){
         	switch(k){
         		case 0:
-        			printf("Numéro du train : %s\n",pv);
+        			printf("Numéro du train : %s\n",affichage);
         			break;
         		case 1:
-        			printf("Ville de départ : %s\n",pv);
+        			printf("Ville de départ : %s\n",affichage);
         			break;
         		case 2:
-        			printf("Ville d'arrivée : %s\n",pv);
+        			printf("Ville d'arrivée : %s\n",affichage);
         			break;
         		case 3:
-        			printf("Heure de départ : %s\n",pv);
+        			printf("Heure de départ : %s\n",affichage);
         			break;
         		case 4:
-        			printf("Heure d'arrivée : %s\n",pv);
+        			printf("Heure d'arrivée : %s\n",affichage);
         			break;
         		case 5:
-        			printf("Prix du trajet : %s\n",pv);
+        			printf("Prix du trajet : %s\n",affichage);
         			break;
         		case 6:
-        			printf("Option (REDUC/SUPPL) : %s\n",pv);
+        			printf("Option (REDUC/SUPPL) : %s\n",affichage);
         			break;
         	}
-        	pv = strtok(NULL, ";");
+        	affichage = strtok(NULL, ";");
         	k++;
     	}
     }
