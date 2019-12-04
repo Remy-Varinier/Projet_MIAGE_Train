@@ -54,8 +54,6 @@ void listTrancheHoraire(struct TabTrain tabTrain, char* villeDep, char* villeAr,
     }
 }
 
-
-
 int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct Train *train){
 	struct TabTrain trains;
 	listBonnesVilles(tabTrain, villeDep, villeAr, &trains);
@@ -69,6 +67,10 @@ int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct 
 	return EXIT_FAILURE;
 }
 	
+/* fonction qui calcule le nouveau prix en fonction de l'option demandé:
+ * REDUC -> baisse le prix de 20%
+ * SUPPL -> augmente le prix de 10%
+ */
 double option(struct Train train){
 	double prix, nv_prix;
 	if (strcmp("REDUC",train.option) == 0){
@@ -85,6 +87,7 @@ double option(struct Train train){
 	return nv_prix;
 }
 
+/* fonction qui permet de trouver quel est le train qui est le moins cher pour le trajet */
 struct Train meilleur_prix(struct TabTrain tab_train){
 	int i = 1;
 	struct Train train = tab_train.trains[0];
@@ -97,7 +100,17 @@ struct Train meilleur_prix(struct TabTrain tab_train){
 	return train;
 }
 
-struct Train duree_optimum(struct TabTrain tab_train){
+/* fonction qui calcule la durée d'un train */
+int duree(struct Train train){
+	int duree = 0;
+	int h1,h2;
+	h1 = heureVersMinutes(train.h_depart);
+	h2 = heureVersMinutes(train.h_arrivee);
+	duree = h2 - h1;
+	return duree;
+}
+
+/*struct Train duree_optimum(struct TabTrain tab_train){
 	int i=1;
 	int h1,h2,h3,h4,dh1,dh2;
 	struct Train train = tab_train.trains[0];
@@ -108,6 +121,23 @@ struct Train duree_optimum(struct TabTrain tab_train){
 		h3 = heureVersMinutes(tab_train.trains[i].h_depart);
 		h4 = heureVersMinutes(tab_train.trains[i].h_arrivee);
 		dh2 = h4 - h3;
+		if(dh1>dh2){
+			train = tab_train.trains[i];
+		}
+		i++;
+	}
+	return train;
+}
+*/
+
+/* fonction qui permet de trouver quel est le train qui met le moins de temps pour le trajet */
+struct Train duree_optimum(struct TabTrain tab_train){
+	int i=1;
+	int dh1,dh2;
+	struct Train train = tab_train.trains[0];
+	while(i<tab_train.taille){
+		dh1 = duree(train);
+		dh2 = duree(tab_train.trains[i]);
 		if(dh1>dh2){
 			train = tab_train.trains[i];
 		}

@@ -12,4 +12,6 @@ double option(struct Train train);
 
 struct Train meilleur_prix(struct TabTrain tab_train);
 
+int duree(struct Train train);
+
 struct Train duree_optimum(struct TabTrain tab_train);
