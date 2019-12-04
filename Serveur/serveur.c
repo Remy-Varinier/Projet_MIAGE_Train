@@ -25,6 +25,8 @@ void fils(int echange){
 		int lu = read(echange, tampon, MAX);
 		printf("J'ai lu : %s, int : %d\n", tampon, lu);
 		fin = strcmp(tampon,"exit") != 0;
+		struct TabTrain tab_res;
+		tab_res.taille = 0;
 		if(fin){
 			int i = 0;
             pv=NULL;
@@ -42,22 +44,19 @@ void fils(int echange){
 			tab_train.taille = 0;
 			lecture_fichier(fichier,&tab_train);
 
-			struct TabTrain tab_res;
-			tab_res.taille = 0;
-
             switch(i){
 				case 2:
 					listBonnesVilles(tab_train, commande[0], commande[1], &tab_res);
 					break;
 				case 3:
-					listHoraire(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), &tab_res);
+					getTrainDep(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), &tab_res);
 					break;
 				case 4:
-					listTrancheHoraire(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), decoupe_horaire(commande[3]), &tab_res);
+					getTrainDepArr(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), decoupe_horaire(commande[3]), &tab_res);
 					break;
 			}
-            for(int k = 0; k<i;k++){
-				printf("%s\n",commande[k]);
+            for(int k = 0; k<tab_res.taille;k++){
+				printf("%d:%d\n",tab_res.trains[k].h_depart.heure,tab_res.trains[k].h_depart.minute);
 			}
         }
         
