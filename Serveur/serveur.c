@@ -25,8 +25,8 @@ void reponse(struct TabTrain tab, int echange){
 	if(resultat[taille-1] == '!'){
 		resultat[taille-1] = '\0';
 	}
-	//write(echange,resultat,strlen(resultat));
-	printf("%s\n",resultat,strlen(resultat));
+	write(echange,resultat,strlen(resultat));
+	printf("%s\n",resultat);
 }
 
 void fils(int echange){

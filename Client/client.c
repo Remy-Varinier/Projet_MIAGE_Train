@@ -111,11 +111,11 @@ int main(int argc,char *argv[]){
 		enleverBack(arret);
 		
 	}while(strcmp(arret, "Non") != 0 || strcmp(arret, "non") != 0);
-
+printf("tampon: \n");
 	write(echange, "exit", strlen("exit")+1);
-
+printf("tampon1: \n");
 	int lu = read(echange, tampon, MAX);
-
+	printf("tampon: %s\n", tampon);
     char* affichage = NULL;
     char* ligneRes[MAX];
     int i = 0;
