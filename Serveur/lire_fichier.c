@@ -57,7 +57,7 @@ struct Train decoupe_ligne(char *ligne_train){
 
 int lecture_fichier(FILE *fichier, struct TabTrain *tab_train){
     int i = 0;
-    fichier = fopen("/ext/gourdons/Bureau/Projet_MIAGE_Train/Data/Trains.txt", "r"); /* ouverture du fichier */
+    fichier = fopen("Data/Trains.txt", "r"); /* ouverture du fichier */
     if (fichier != NULL){
 		// On peut lire dans le fichier
 		char line [128]; /* tableau du nombre de ligne maximum */

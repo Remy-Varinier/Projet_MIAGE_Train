@@ -6,7 +6,9 @@ void listTrancheHoraire(struct TabTrain tabTrain, char* villeDep, char* villeAr,
 
 void triDep(struct TabTrain *trains);
 
-int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct Train *train);
+int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct TabTrain *train);
+
+int getTrainDepArr(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct Horaire hDep2, struct TabTrain *train);
 
 double option(struct Train train);
 

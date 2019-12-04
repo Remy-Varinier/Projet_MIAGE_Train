@@ -19,13 +19,13 @@ void listBonnesVilles(struct TabTrain tabTrain, char* villeDep, char* villeAr, s
 }
 
 void triDep(struct TabTrain *trains){
-	struct Horaire temp;
+	struct Train temp;
     for(int i = 0; i < trains->taille; i++){
-        for(int j = 0; j < trains->taille + 2; j++){
-            if(heureVersMinutes(trains->trains[j].h_depart) > heureVersMinutes(trains->trains[j + 1].h_depart)){
-                temp = trains->trains[j].h_depart;
-                trains->trains[j].h_depart = trains->trains[j + 1].h_depart;
-                trains->trains[j + 1].h_depart = temp;
+        for(int j = 0; j < trains->taille; j++){
+            if(heureVersMinutes(trains->trains[i].h_depart) < heureVersMinutes(trains->trains[j].h_depart)){
+                temp = trains->trains[i];
+                trains->trains[i] = trains->trains[j];
+                trains->trains[j] = temp;
             }
         }
     }
@@ -36,6 +36,7 @@ int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct 
 	listBonnesVilles(tabTrain, villeDep, villeAr, &trains);
 	triDep(&trains);
 	for(int i = 0; i < trains.taille; i++){
+		
 		if(heureVersMinutes(trains.trains[i].h_depart) >= heureVersMinutes(hDep)){
 			train->trains[0] = trains.trains[i];
 			train->taille = 1;
@@ -45,18 +46,18 @@ int getTrainDep(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct 
 	return EXIT_FAILURE;
 }
 
-int getTrainDepArr(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct Horaire hDep2, struct Train* bonTrain){
+int getTrainDepArr(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire hDep, struct Horaire hDep2, struct TabTrain* bonTrain){
 	struct TabTrain trains;
 	listBonnesVilles(tabTrain, villeDep, villeAr, &trains);
 	triDep(&trains);
 	int k=0;
 	for(int i = 0; i < trains.taille; i++){
-		if(heureVersMinutes(trains.trains[i].h_depart) >= heureVersMinutes(hDep) || heureVersMinutes(trains.trains[i].h_depart) <= heureVersMinutes(hDep2) ){
+		if(heureVersMinutes(trains.trains[i].h_depart) >= heureVersMinutes(hDep) && heureVersMinutes(trains.trains[i].h_depart) <= heureVersMinutes(hDep2) ){
 			bonTrain->trains[k] = trains.trains[i];
 			k++;
 		}
 	}
-	bonTrain.taille->k;
+	bonTrain->taille = k;
 	return EXIT_SUCCESS;;
 }
 
