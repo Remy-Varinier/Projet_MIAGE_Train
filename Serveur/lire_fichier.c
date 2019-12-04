@@ -9,8 +9,6 @@
 #include "serveur.h"
 #include "lire_fichier.h"
 
-#define MAX 100
-
 // fonction qui renvoit les heures et les minutes qui sont sous cette forme:"10:25"
 struct Horaire decoupe_horaire(char *horaire){
 	struct Horaire h;

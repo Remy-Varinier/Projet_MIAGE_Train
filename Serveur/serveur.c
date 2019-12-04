@@ -19,14 +19,14 @@ void reponse(struct TabTrain tab, int echange){
 	char resultat[MAX] = ""; 
 	for(int i = 0; i < tab.taille;i++){
 		struct Train t = tab.trains[i];
-		sprintf(resultat,"%s%d;%d;%d;%d;%d;%d;%.2f;%s!", resultat,t.num_train, t.h_depart.heure, t.h_depart.minute, t.h_arrivee.heure, t.h_arrivee.minute,duree(t),t.prix, t.option);
+		sprintf(resultat,"%s%d;%s;%s;%d:%d;%d:%d;%d;%.2f;%s!", resultat,t.num_train, t.ville_dep, t.ville_arr,t.h_depart.heure, t.h_depart.minute, t.h_arrivee.heure, t.h_arrivee.minute,duree(t),t.prix, t.option);
 	}
 	int taille = strlen(resultat);
 	if(resultat[taille-1] == '!'){
 		resultat[taille-1] = '\0';
 	}
-	write(echange,resultat,strlen(resultat));
-	printf("%s\n",resultat);
+	write(echange,resultat,strlen(resultat)+1);
+	printf("%s    nb: \n",resultat);
 }
 
 void fils(int echange){
@@ -57,17 +57,16 @@ void fils(int echange){
                 pv = strtok(NULL, ";");
                 i++;
             }
-
             switch(i){
-				case 2:
+				case 3:
 					listBonnesVilles(tab_train, commande[0], commande[1], &tab_res);
 					reponse(tab_res, echange);
 					break;
-				case 3:
+				case 4:
 					getTrainDep(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), &tab_res);
 					reponse(tab_res, echange);
 					break;
-				case 4:
+				case 5:
 					getTrainDepArr(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), decoupe_horaire(commande[3]), &tab_res);
 					reponse(tab_res, echange);
 					break;

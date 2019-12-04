@@ -1,4 +1,4 @@
-#define MAX 100
+#define MAX 1000
 
 #ifndef RESEAU_H
 #define RESEAU_H
