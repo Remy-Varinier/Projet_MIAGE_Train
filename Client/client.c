@@ -117,7 +117,7 @@ int main(int argc,char *argv[]){
 	int lu = read(echange, tampon, MAX);
 
     char* affichage = NULL;
-    char ligneRes[MAX];
+    char* ligneRes[MAX];
     int i = 0;
     affichage = strtok(tampon, "!");  
     //tant que la ligne n'est pas vide
