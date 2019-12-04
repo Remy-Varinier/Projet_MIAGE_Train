@@ -46,12 +46,13 @@ int main(int argc,char *argv[]){
 	char pointV[2] = ";";
 
 	int echange = socketClient(argv[1], atoi(argv[2]));
-	
+	printf("Cher utilisateur, bienvenue sur la consultation des trains en ligne.\n");
+	printf("La liste des villes disponibles est: Valence, Grenoble, Montélimar, Paris Gare de Lyon, Marseille, Lyon Part-Dieu et Strasbourg.\n");
 	do{
-		msg = "Entrez une ville de départ :\n";
+		msg = "Veuillez indiquer une ville de départ :\n";
 		lectureClient(msg, ville_depart);
 		
-		msg = "Entrez une ville d'arrivée :\n";
+		msg = "Veuillez indiquer une ville d'arrivée :\n";
 		lectureClient(msg, ville_arrivee);
 		
 		size = strlen(ville_depart)+strlen(ville_arrivee)+3+20;
@@ -63,11 +64,11 @@ int main(int argc,char *argv[]){
 		
 		if(strcmp(param,"1") == 0){
 			
-			msg = "Entrez un horaire de départ : (HH:MM)\n";
+			msg = "Veuillez entrer un horaire de départ : (HH:MM)\n";
 			lectureClient(msg, horaire);
 			err = horaire_valide(horaire);
 			while(err == 0){
-				msg = "Erreur de format\nEntrez a nouveau un horaire de départ : (HH:MM)\n";
+				msg = "Attention, erreur de format. \nEntrez a nouveau un horaire de départ : (HH:MM)\n";
 				lectureClient(msg, horaire);
 				err = horaire_valide(horaire);
 			}
@@ -76,20 +77,20 @@ int main(int argc,char *argv[]){
 			
 		} else if(strcmp(param,"2") == 0){
 			strcat(entree, pointV);
-			msg = "Entrez un horaire de départ min : (HH:MM)\n";
+			msg = "Veuillez entrer un horaire de départ minimum : (HH:MM)\n";
 			lectureClient(msg, horaire1);
 			err = horaire_valide(horaire1);
 			while(err == 0){
-				msg = "Erreur de format\nEntrez a nouveau un horaire de départ min : (HH:MM)\n";
+				msg = "Attention, erreur de format\nEntrez a nouveau un horaire de départ min : (HH:MM)\n";
 				lectureClient(msg, horaire1);
 				err = horaire_valide(horaire1);
 			}
 			
-			msg = "Entrez un horaire de départ max : (HH:MM)\n";
+			msg = "Veuillez entrez un horaire de départ maximum : (HH:MM)\n";
 			lectureClient(msg, horaire2);
 			err = horaire_valide(horaire2);
 			while(err == 0){
-				msg = "Erreur de format\nEntrez a nouveau un horaire de départ max : (HH:MM)\n";
+				msg = "Attention, erreur de format\nEntrez a nouveau un horaire de départ max : (HH:MM)\n";
 				lectureClient(msg, horaire2);
 				err = horaire_valide(horaire2);
 			}
@@ -101,7 +102,7 @@ int main(int argc,char *argv[]){
 		write(echange, entree, strlen(entree)+1);
 		free(entree);
 		
-		printf("Voulez-vous faire une nouvelle recherche ? (Oui/Non)\n");
+		printf("Souhaitez-vous faire une nouvelle recherche ? (Oui/Non)\n");
 		fgets(arret, MAX, stdin);
 		enleverBack(arret);
 		

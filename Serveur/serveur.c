@@ -16,14 +16,13 @@
 #include "fonctions_trains.h"
 
 void fils(int echange){
-	printf("une co\n");
+	printf("Un client s'est connecté.\n");
 	char tampon[MAX];
 	bool fin = true;
 	char *pv;
 	char commande[4][MAX];
 	do{
 		int lu = read(echange, tampon, MAX);
-		printf("J'ai lu : %s, int : %d\n", tampon, lu);
 		fin = strcmp(tampon,"exit") != 0;
 		struct TabTrain tab_res;
 		tab_res.taille = 0;
@@ -66,10 +65,9 @@ void fils(int echange){
 int main(int argc,char *argv[]){
 	pid_t id;
 	int ecoute = socketServeur(atoi(argv[1]));
+	printf("Connexion... \n");
 	do{
-		printf("en attente de co : \n");
 		int echange = accept(ecoute,NULL, NULL);
-		printf("connecté : \n");
 		id = fork();
 		if(id == 0){
 			fils(echange);
