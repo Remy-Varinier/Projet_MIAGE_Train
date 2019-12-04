@@ -55,6 +55,7 @@ struct Train decoupe_ligne(char *ligne_train){
 	return train;
 }
 
+/* fonction qui lit un fichier ligne par ligne et qui applique la fonction decoupe_ligne sur chaque ligne */
 int lecture_fichier(FILE *fichier, struct TabTrain *tab_train){
     int i = 0;
     fichier = fopen("Data/Trains.txt", "r"); /* ouverture du fichier */
