@@ -19,13 +19,13 @@ void reponse(struct TabTrain tab, int echange){
 	char resultat[MAX] = ""; 
 	for(int i = 0; i < tab.taille;i++){
 		struct Train t = tab.trains[i];
-		sprintf(resultat,"%s%d;%d;%d;%d;%d;%.2f;%s!", resultat,t.num_train, t.h_depart.heure, t.h_depart.minute, t.h_arrivee.heure, t.h_arrivee.minute,t.prix, t.option);
+		sprintf(resultat,"%s%d;%d;%d;%d;%d;%d;%.2f;%s!", resultat,t.num_train, t.h_depart.heure, t.h_depart.minute, t.h_arrivee.heure, t.h_arrivee.minute,duree(t),t.prix, t.option);
 	}
 	int taille = strlen(resultat);
 	if(resultat[taille-1] == '!'){
 		resultat[taille-1] = '\0';
 	}
-	//write(echange,resultat,
+	//write(echange,resultat,strlen(resultat));
 	printf("%s\n",resultat,strlen(resultat));
 }
 
