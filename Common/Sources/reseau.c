@@ -34,11 +34,11 @@ int socketClient(char nomServeur[], int port){
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);
 	struct hostent *host;
-	host = gethostbyname("localhost");
+	host = gethostbyname(nomServeur);
 	memcpy(&sin.sin_addr.s_addr,host->h_addr_list[0],sizeof(sin.sin_addr.s_addr));
 	int echange = connect(connection,(struct sockaddr *)&sin,sizeof(sin));
 	if(echange == -1){
-		printf("Impossible d'acceder au serveur (Essayez de changer de port)\n");
+		printf("\033[0;31mImpossible d'acceder au serveur (Essayez de changer de port)\n\033[0m");
 		exit(EXIT_FAILURE);
 	}
 	return connection;

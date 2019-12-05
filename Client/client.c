@@ -31,8 +31,7 @@ void afficheResultat(Resultat r){
 	if(strcmp(r.option, "NULL") != 0)
 		sprintf(optionPrix, "Prix avec %s : %s",r.option,r.prixModif);
 	
-		
-	printf("Train n°: %s\t\t%s (%s) \t%s (%s)\n\tDurée:%s\tPrix:%s€\t%s\n\n",r.numTrain, r.villeDep, r.hDep, r.villeArr, r.hArr, r.duree, r.prix,optionPrix);
+	printf("\033[0;32mTrain n°: %s\033[0m\t\t\033[1;34m%s\033[0m (\033[0;36m%s\033[0m) \t\033[1;34m%s\033[0m (\033[0;36m%s\033[0m)\n\tDurée:%s\tPrix:%s€\t%s\n\n",r.numTrain, r.villeDep, r.hDep, r.villeArr, r.hArr, r.duree, r.prix,optionPrix);
 }
 
 // remplacer '\n' par '\0'
@@ -68,66 +67,73 @@ int main(int argc,char *argv[]){
 	char *msg = (char*) malloc(MAX);
 	int size;
 	int err;
-
+	
 	int echange = socketClient(argv[1], atoi(argv[2]));
 	
 	read(echange, listGare, MAX);
-	printf("\nCher utilisateur, bienvenue sur la consultation des trains en ligne\n");
-	printf("La liste des villes disponibles est: %s.\n\n",listGare);
+	
+	//utilise le programme clear de bash
+	system("clear");
+	
+	printf("Cher utilisateur, bienvenue sur la consultation des trains en ligne\n");
+	printf("La liste des villes disponibles est: \033[1;34m%s\33[0m.\n\n",listGare);
 	do{
-		msg = "Veuillez indiquer une ville de départ :\n";
+		msg = "\nVeuillez indiquer une ville de départ :\n";
 		lectureClient(msg, ville_depart);
 		
-		msg = "Veuillez indiquer une ville d'arrivée :\n";
+		msg = "\nVeuillez indiquer une ville d'arrivée :\n";
 		lectureClient(msg, ville_arrivee);
 		
 		size = strlen(ville_depart)+strlen(ville_arrivee)+3+20;
 		char *entree = (char*) malloc(size);
 		
-		printf("Voulez-vous entrer :\n\tUn horaire de départ ? (1)\n\tUn intervalle pour l'horaire de départ ? (2)\n\tPas de préférence d'horaire ? (0)\n");
+		printf("\nVoulez-vous entrer :\n\tUn horaire de départ ? (\033[0;32m1\33[0m)\n\tUn intervalle pour l'horaire de départ ? (\033[0;32m2\33[0m)\n\tPas de préférence d'horaire ? (\033[0;32m0\33[0m)\n");
 		fgets(param, MAX, stdin);
 		enleverBack(param);
 		
 		if(strcmp(param,"1") == 0){
 			
-			msg = "Veuillez entrer un horaire de départ : (HH:MM)\n";
+			msg = "\nVeuillez entrer un horaire de départ : (\033[0;32mHH:MM\33[0m)\n";
 			lectureClient(msg, horaire);
 			err = horaire_valide(horaire);
 			while(err == 0){
-				msg = "Attention, erreur de format. \nEntrez a nouveau un horaire de départ : (HH:MM)\n";
+				msg = "Attention, erreur de format. \nEntrez a nouveau un horaire de départ : (\033[0;32mHH:MM\33[0m)\n";
 				lectureClient(msg, horaire);
 				err = horaire_valide(horaire);
 			}
 			sprintf(entree,"%s;%s;%s;0",ville_depart,ville_arrivee,horaire);
 		} else if(strcmp(param,"2") == 0){
-			msg = "Veuillez entrer un horaire de départ minimum : (HH:MM)\n";
+			msg = "\nVeuillez entrer un horaire de départ minimum : (HH:MM)\n";
 			lectureClient(msg, horaire1);
 			err = horaire_valide(horaire1);
 			while(err == 0){
-				msg = "Attention, erreur de format\nEntrez a nouveau un horaire de départ min : (HH:MM)\n";
+				msg = "Attention, erreur de format\nEntrez a nouveau un horaire de départ min : (\033[0;32mHH:MM\33[0m)\n";
 				lectureClient(msg, horaire1);
 				err = horaire_valide(horaire1);
 			}
 			
-			msg = "Veuillez entrez un horaire de départ maximum : (HH:MM)\n";
+			msg = "\nVeuillez entrez un horaire de départ maximum : (\033[0;32mHH:MM\33[0m)\n";
 			lectureClient(msg, horaire2);
 			err = horaire_valide(horaire2);
 			while(err == 0){
-				msg = "Attention, erreur de format\nEntrez a nouveau un horaire de départ max : (HH:MM)\n";
+				msg = "Attention, erreur de format\nEntrez a nouveau un horaire de départ max : (\033[0;32mHH:MM\33[0m)\n";
 				lectureClient(msg, horaire2);
 				err = horaire_valide(horaire2);
 			}
-			msg = "Voulez-vous :\n\tLe trajet au meilleur prix ? (1)\n\tLe trajet de durée optimum ? (2)\n\tTous les trains ? (0)\n";
+			msg = "\nVoulez-vous :\n\tLe trajet au meilleur prix ? (\033[0;32m1\33[0m)\n\tLe trajet de durée optimum ? (\033[0;32m2\33[0m)\n\tTous les trains ? (\033[0;32m0\33[0m)\n";
 			lectureClient(msg, trajet);
 			sprintf(entree,"%s;%s;%s;%s;%s",ville_depart,ville_arrivee,horaire1,horaire2,trajet);
 		}else{
-			msg = "Voulez-vous :\n\tLe trajet au meilleur prix ? (1)\n\tLe trajet de durée optimum ? (2)\n\tTous les trains ? (0)\n";
+			msg = "\nVoulez-vous :\n\tLe trajet au meilleur prix ? (\033[0;32m1\33[0m)\n\tLe trajet de durée optimum ? (\033[0;32m2\33[0m)\n\tTous les trains ? (\033[0;32m0\33[0m)\n";
 			lectureClient(msg, trajet);
 			sprintf(entree,"%s;%s;%s",ville_depart,ville_arrivee,trajet);
 		}
 		
 		write(echange, entree, strlen(entree)+1);
 		free(entree);
+		
+		//utilise le programme clear de bash
+		system("clear");
 		
 		char tampon[MAX]="";
 		int lu = read(echange, tampon, MAX);
@@ -137,7 +143,10 @@ int main(int argc,char *argv[]){
 		int i = 0;
 		Resultat resultats[MAX_RES];
 		affichage = strtok(tampon, "!");  
-		//tant que la ligne n'est pas vide
+		
+		
+		printf("Voici le(s) resultat(s) de votre recherche:\n\n");
+		//tant qu'il reste des trains
 		while(affichage != NULL){
 			ligneRes[i] = affichage;
 			affichage = strtok(NULL, "!");
@@ -148,8 +157,8 @@ int main(int argc,char *argv[]){
 			int k = 0;
 			affichage = strtok(ligneRes[j], ";");  
 			printf("\t========================================\n");
-			//tant que la ligne n'est pas vide
 			int reduc=0;
+			//tant qu'il reste des paramètres
 			while(affichage != NULL){
 				switch(k){
 					case 0:
@@ -187,9 +196,10 @@ int main(int argc,char *argv[]){
 			
 			afficheResultat(resultats[j]);
 		}
+		if(i == 0)
+			printf("\033[0;31mAucun train ne correspond à votre demande... \n\n\033[0m");
 		
-		
-		printf("Souhaitez-vous faire une nouvelle recherche ? (Oui/Non)\n");
+		printf("Souhaitez-vous faire une nouvelle recherche ? (\033[0;32mOui\33[0m/\033[0;32mNon\33[0m)\n");
 		fgets(arret, MAX, stdin);
 		enleverBack(arret);
 		

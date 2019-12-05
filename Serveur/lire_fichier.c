@@ -76,7 +76,7 @@ int lecture_fichier(FILE *fichier, struct TabTrain *tab_train){
         (*tab_train).taille = i;
     }else{
         // Erreur d'ouverture de fichier
-        printf("Impossible d'ouvrir le fichier Trains.txt \n");
+        printf("\033[0;31mImpossible d'ouvrir le fichier Trains.txt \n\033[0m");
     }
     return 0;
 }
