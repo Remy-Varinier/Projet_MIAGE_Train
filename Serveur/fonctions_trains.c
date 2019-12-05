@@ -117,26 +117,6 @@ int duree(struct Train train){
 	return duree;
 }
 
-/*struct Train duree_optimum(struct TabTrain tab_train){
-	int i=1;
-	int h1,h2,h3,h4,dh1,dh2;
-	struct Train train = tab_train.trains[0];
-	while(i<tab_train.taille){
-		h1 = heureVersMinutes(train.h_depart);
-		h2 = heureVersMinutes(train.h_arrivee);
-		dh1 = h2 - h1;
-		h3 = heureVersMinutes(tab_train.trains[i].h_depart);
-		h4 = heureVersMinutes(tab_train.trains[i].h_arrivee);
-		dh2 = h4 - h3;
-		if(dh1>dh2){
-			train = tab_train.trains[i];
-		}
-		i++;
-	}
-	return train;
-}
-*/
-
 /* fonction qui permet de trouver quel est le train qui met le moins de temps pour le trajet */
 struct TabTrain duree_optimum(struct TabTrain tab_train){
 	int i=1;
@@ -155,81 +135,3 @@ struct TabTrain duree_optimum(struct TabTrain tab_train){
 	t.trains[0] = train;
 	return t;
 }
-	
-/*
-int liste_trains_horaires(struct Train tab_train[], char *ville_depart, char *ville_arrivee, struct Horaire horaire_depart , struct Train tab_res[]){
-    int i = 0;
-    int nbres = 0;
-    int h_d = heureVersMinutes(horaire_depart);
-    int hTrainD;
-    while(tab_train[i].ville_dep != NULL){
-        if(strcmp(ville_depart, tab_train[i].ville_dep) == 0 && strcmp(ville_arrivee, tab_train[i].ville_arr) == 0){
-            hTrainD = heureVersMinutes(tab_train[i].h_depart);
-            if(h_d == hTrainD){
-                tab_res[nbres] = tab_train[i];
-                nbres++;
-            }
-            else if(i==0){
-            }
-        }
-    }
-    return nbres;
-}
-
-void liste_trains_tranche_horaire(struct Train tab_train[], char *ville_depart, char *ville_arrivee, struct Horaire horaire_depart1, struct Horaire horaire_depart2, struct Train tab_res[]){
-    int i = 0;
-    int nbres = 0;
-    int h_d1 = heureVersMinutes(horaire_depart1);
-    int h_d2 = heureVersMinutes(horaire_depart2);
-    if(h_d1 > h_d2){
-        int tmp = h_d1;
-        h_d1 = h_d2;
-        h_d2 = tmp;
-    }
-    int hTrainD;
-    while(tab_train[i].ville_dep != NULL){
-        if(strcmp(ville_depart, tab_train[i].ville_dep) == 0 && strcmp(ville_arrivee, tab_train[i].ville_arr) == 0){
-            hTrainD = heureVersMinutes(tab_train[i].h_depart);
-            if(h_d1 < hTrainD && h_d2 > hTrainD){
-                tab_res[nbres] = tab_train[i];
-                nbres++;
-            }
-        }
-    }
-}
-void liste_trains_villes(struct Train tab_train[], char *ville_depart, char *ville_arrivee, struct Train tab_res[]){
-    int i = 0;
-    int nbres = 0;
-    while(tab_train[i].ville_dep != NULL){
-        if(strcmp(ville_depart, tab_train[i].ville_dep) == 0 && strcmp(ville_arrivee, tab_train[i].ville_arr) == 0){
-            tab_res[nbres] = tab_train[i];
-            nbres++;
-        }
-        i++;
-    }
-}
-*/
-
-/*
- * void listHoraire(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire horaire_depart, struct TabTrain *res){
-	int compt = 0;
-	for(int i = 0; i < tabTrain.taille; i++){
-		if(strcmp(villeDep, tabTrain.trains[i].ville_dep) == 0 && strcmp(villeAr, tabTrain.trains[i].ville_arr) == 0){
-			(*res).trains[compt] = tabTrain.trains[i];
-			compt++;
-		}
-	}
-	(*res).taille = compt;
-}
-
-void listTrancheHoraire(struct TabTrain tabTrain, char* villeDep, char* villeAr, struct Horaire horaire1, struct Horaire horaire2, struct TabTrain *res){
-	int compt = 0;
-	for(int i = 0; i < tabTrain.taille; i++){
-		if(strcmp(villeDep, tabTrain.trains[i].ville_dep) == 0 && strcmp(villeAr, tabTrain.trains[i].ville_arr) == 0){
-			(*res).trains[compt] = tabTrain.trains[i];
-			compt++;
-		}
-	}
-	(*res).taille = compt;
-}
-*/

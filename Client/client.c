@@ -78,7 +78,7 @@ int main(int argc,char *argv[]){
 	printf("Cher utilisateur, bienvenue sur la consultation des trains en ligne\n");
 	printf("La liste des villes disponibles est: \033[1;34m%s\33[0m.\n\n",listGare);
 	do{
-		msg = "\nVeuillez indiquer une ville de départ :\n";
+		msg = "Veuillez indiquer une ville de départ :\n";
 		lectureClient(msg, ville_depart);
 		
 		msg = "\nVeuillez indiquer une ville d'arrivée :\n";
@@ -202,7 +202,8 @@ int main(int argc,char *argv[]){
 		printf("Souhaitez-vous faire une nouvelle recherche ? (\033[0;32mOui\33[0m/\033[0;32mNon\33[0m)\n");
 		fgets(arret, MAX, stdin);
 		enleverBack(arret);
-		
+		//utilise le programme clear de bash
+	system("clear");
 	}while(strcmp(arret, "Non") != 0);
 	write(echange, "exit", strlen("exit")+1);
 	
