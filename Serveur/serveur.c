@@ -19,7 +19,8 @@ void reponse(struct TabTrain tab, int echange){
 	char resultat[MAX] = ""; 
 	for(int i = 0; i < tab.taille;i++){
 		struct Train t = tab.trains[i];
-		sprintf(resultat,"%s%d;%s;%s;%d:%d;%d:%d;%d;%.2f;%s!", resultat,t.num_train, t.ville_dep, t.ville_arr,t.h_depart.heure, t.h_depart.minute, t.h_arrivee.heure, t.h_arrivee.minute,duree(t),t.prix, t.option);
+		struct Horaire h = minutesVersHeures(duree(t));
+		sprintf(resultat,"%s%d;%s;%s;%02dh%02d;%02dh%02d;%02dh%02d;%.2f;%s;%.2f!", resultat,t.num_train, t.ville_dep, t.ville_arr,t.h_depart.heure, t.h_depart.minute, t.h_arrivee.heure, t.h_arrivee.minute, h.heure, h.minute,t.prix, t.option, option(t));
 	}
 	int taille = strlen(resultat);
 	if(resultat[taille-1] == '!'){

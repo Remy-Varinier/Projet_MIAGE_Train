@@ -107,18 +107,14 @@ int main(int argc,char *argv[]){
 		
 		char tampon[MAX]="";
 		int lu = read(echange, tampon, MAX);
-		printf("tampon: %s nb :%d\n", tampon,lu);
 		
 		char* affichage = NULL;
 		char *ligneRes[MAX];
 		int i = 0;
 		affichage = strtok(tampon, "!");  
 		//tant que la ligne n'est pas vide
-		printf("Hey\n");
 		while(affichage != NULL){
-			printf("Hey : %s\n",affichage);
 			ligneRes[i] = affichage;
-			printf("Hey : %s\n",ligneRes[i]);
 			affichage = strtok(NULL, "!");
 			i++;
 		}
@@ -126,7 +122,9 @@ int main(int argc,char *argv[]){
 			affichage = NULL;
 			int k = 0;
 			affichage = strtok(ligneRes[j], ";");  
+			printf("\t========================================\n");
 			//tant que la ligne n'est pas vide
+			int reduc=0;
 			while(affichage != NULL){
 				switch(k){
 					case 0:
@@ -151,9 +149,18 @@ int main(int argc,char *argv[]){
 						printf("Prix du trajet : %s\n",affichage);
 						break;
 					case 7:
-						printf("Option (REDUC/SUPPL) : %s\n",affichage);
+						reduc = strcmp(affichage, "NULL");
+						if(reduc != 0)
+							printf("Prix avec %s : ",affichage);
+						break;
+					case 8:
+						if(reduc == 0)
+							printf("Option (REDUC/SUPPL) : Pas de changement sur le prix\n");
+						else
+							printf("%s\n",affichage);
 						break;
 				}
+				printf("\n");
 				affichage = strtok(NULL, ";");
 				k++;
 			}

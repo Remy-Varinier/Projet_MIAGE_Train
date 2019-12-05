@@ -25,3 +25,4 @@ struct TabTrain{
 };
 
 int heureVersMinutes(struct Horaire h);
+struct Horaire minutesVersHeures(int minute);

@@ -79,11 +79,11 @@ double option(struct Train train){
 	double prix, nv_prix;
 	if (strcmp("REDUC",train.option) == 0){
 		prix = train.prix;
-		nv_prix = prix * (80/100);
+		nv_prix = prix * (80.0/100);
 	}else{
 		if (strcmp("SUPPL",train.option) == 0){
 			prix = train.prix;
-			nv_prix = prix + (prix * (10/100));
+			nv_prix = prix + (prix * (10.0/100));
 		}else{
 			nv_prix = train.prix;
 		}
