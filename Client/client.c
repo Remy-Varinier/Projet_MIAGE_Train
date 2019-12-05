@@ -80,9 +80,13 @@ int main(int argc,char *argv[]){
 	do{
 		msg = "Veuillez indiquer une ville de départ :\n";
 		lectureClient(msg, ville_depart);
+		if(strlen(ville_depart) == 0)
+			strcpy(ville_depart,"a");
 		
 		msg = "\nVeuillez indiquer une ville d'arrivée :\n";
 		lectureClient(msg, ville_arrivee);
+		if(strlen(ville_arrivee) == 0)
+			strcpy(ville_arrivee,"a");
 		
 		size = strlen(ville_depart)+strlen(ville_arrivee)+3+20;
 		char *entree = (char*) malloc(size);
@@ -126,9 +130,10 @@ int main(int argc,char *argv[]){
 		}else{
 			msg = "\nVoulez-vous :\n\tLe trajet au meilleur prix ? (\033[0;32m1\33[0m)\n\tLe trajet de durée optimum ? (\033[0;32m2\33[0m)\n\tTous les trains ? (\033[0;32m0\33[0m)\n";
 			lectureClient(msg, trajet);
+			if(strcmp(trajet,"2") != 0 && strcmp(trajet,"1") != 0)
+				strcpy(trajet,"0");
 			sprintf(entree,"%s;%s;%s",ville_depart,ville_arrivee,trajet);
 		}
-		
 		write(echange, entree, strlen(entree)+1);
 		free(entree);
 		
