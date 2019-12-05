@@ -92,7 +92,7 @@ double option(struct Train train){
 }
 
 /* fonction qui permet de trouver quel est le train qui est le moins cher pour le trajet */
-struct Train meilleur_prix(struct TabTrain tab_train){
+struct TabTrain meilleur_prix(struct TabTrain tab_train){
 	int i = 1;
 	struct Train train = tab_train.trains[0];
 	while(i<tab_train.taille){
@@ -101,7 +101,10 @@ struct Train meilleur_prix(struct TabTrain tab_train){
 		}
 		i++;
 	}
-	return train;
+	struct TabTrain t;
+	t.taille = 1;
+	t.trains[0] = train;
+	return t;
 }
 
 /* fonction qui calcule la durée d'un train */
@@ -135,7 +138,7 @@ int duree(struct Train train){
 */
 
 /* fonction qui permet de trouver quel est le train qui met le moins de temps pour le trajet */
-struct Train duree_optimum(struct TabTrain tab_train){
+struct TabTrain duree_optimum(struct TabTrain tab_train){
 	int i=1;
 	int dh1,dh2;
 	struct Train train = tab_train.trains[0];
@@ -147,7 +150,10 @@ struct Train duree_optimum(struct TabTrain tab_train){
 		}
 		i++;
 	}
-	return train;
+	struct TabTrain t;
+	t.taille = 1;
+	t.trains[0] = train;
+	return t;
 }
 	
 /*

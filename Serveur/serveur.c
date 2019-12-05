@@ -27,7 +27,6 @@ void reponse(struct TabTrain tab, int echange){
 		resultat[taille-1] = '\0';
 	}
 	write(echange,resultat,strlen(resultat)+1);
-	printf("%s    nb: \n",resultat);
 }
 
 void fils(int echange){
@@ -61,6 +60,10 @@ void fils(int echange){
             switch(i){
 				case 3:
 					listBonnesVilles(tab_train, commande[0], commande[1], &tab_res);
+					if(strcmp(commande[i-1],"2") == 0 )
+						tab_res = duree_optimum(tab_res);
+					else if(strcmp(commande[i-1],"1") == 0 )
+						tab_res = meilleur_prix(tab_res);
 					reponse(tab_res, echange);
 					break;
 				case 4:
@@ -68,16 +71,18 @@ void fils(int echange){
 					reponse(tab_res, echange);
 					break;
 				case 5:
+					if(strcmp(commande[i-1],"2") == 0 )
+						tab_res = duree_optimum(tab_res);
+					else if(strcmp(commande[i-1],"1") == 0 )
+						tab_res = meilleur_prix(tab_res);
 					getTrainDepArr(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), decoupe_horaire(commande[3]), &tab_res);
 					reponse(tab_res, echange);
 					break;
 			}
-            for(int k = 0; k<tab_res.taille;k++){
-				printf("%d:%d\n",tab_res.trains[k].h_depart.heure,tab_res.trains[k].h_depart.minute);
-			}
         }
         
 	}while(fin);	
+	printf("Un client s'est déconnecté\n");
 }
 
 int main(int argc,char *argv[]){

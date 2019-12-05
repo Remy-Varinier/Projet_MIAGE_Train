@@ -11,6 +11,30 @@
 #include "../Common/Headers/reseau.h"
 #include "gestion_erreur_client.h"
 
+#define MAX_CAR 80
+#define MAX_RES 50
+
+typedef struct {
+	char numTrain[MAX_CAR];;
+	char villeDep[MAX_CAR];
+	char villeArr[MAX_CAR];
+	char hDep[MAX_CAR];
+	char hArr[MAX_CAR];
+	char prix[MAX_CAR];
+	char duree[MAX_CAR];
+	char option[MAX_CAR];
+	char prixModif[MAX_CAR];
+}Resultat;
+
+void afficheResultat(Resultat r){
+	char optionPrix[MAX_CAR] = "";
+	if(strcmp(r.option, "NULL") != 0)
+		sprintf(optionPrix, "Prix avec %s : %s",r.option,r.prixModif);
+	
+		
+	printf("Train n°: %s\t\t%s (%s) \t%s (%s)\n\tDurée:%s\tPrix:%s€\t%s\n\n",r.numTrain, r.villeDep, r.hDep, r.villeArr, r.hArr, r.duree, r.prix,optionPrix);
+}
+
 // remplacer '\n' par '\0'
 void enleverBack(char *entree){
 	int taille = strlen(entree);
@@ -111,6 +135,7 @@ int main(int argc,char *argv[]){
 		char* affichage = NULL;
 		char *ligneRes[MAX];
 		int i = 0;
+		Resultat resultats[MAX_RES];
 		affichage = strtok(tampon, "!");  
 		//tant que la ligne n'est pas vide
 		while(affichage != NULL){
@@ -128,42 +153,39 @@ int main(int argc,char *argv[]){
 			while(affichage != NULL){
 				switch(k){
 					case 0:
-						printf("Numéro du train : %s\n",affichage);
+						strcpy(resultats[j].numTrain,affichage);
+						
 						break;
 					case 1:
-						printf("Ville de départ : %s\n",affichage);
+						strcpy(resultats[j].villeDep,affichage);
 						break;
 					case 2:
-						printf("Ville d'arrivée : %s\n",affichage);
+						strcpy(resultats[j].villeArr,affichage);
 						break;
 					case 3:
-						printf("Heure de départ : %s\n",affichage);
+						strcpy(resultats[j].hDep,affichage);
 						break;
 					case 4:
-						printf("Heure d'arrivée : %s\n",affichage);
+						strcpy(resultats[j].hArr,affichage);
 						break;
 					case 5:
-						printf("Durée du trajet : %s\n",affichage);
+						strcpy(resultats[j].duree,affichage);
 						break;
 					case 6:
-						printf("Prix du trajet : %s\n",affichage);
+						strcpy(resultats[j].prix,affichage);
 						break;
 					case 7:
-						reduc = strcmp(affichage, "NULL");
-						if(reduc != 0)
-							printf("Prix avec %s : ",affichage);
+						strcpy(resultats[j].option,affichage);
 						break;
 					case 8:
-						if(reduc == 0)
-							printf("Option (REDUC/SUPPL) : Pas de changement sur le prix\n");
-						else
-							printf("%s\n",affichage);
+						strcpy(resultats[j].prixModif,affichage);
 						break;
 				}
-				printf("\n");
 				affichage = strtok(NULL, ";");
 				k++;
 			}
+			
+			afficheResultat(resultats[j]);
 		}
 		
 		
