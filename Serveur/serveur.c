@@ -32,6 +32,7 @@ void reponse(struct TabTrain tab, int echange){
 void fils(int echange){
 	printf("Un client s'est connecté.\n");
 	char tampon[MAX];
+	char listGare[MAX] = "";
 	bool fin = true;
 	char *pv;
 	char commande[4][MAX];
@@ -39,6 +40,21 @@ void fils(int echange){
 	struct TabTrain tab_train;
 	tab_train.taille = 0;
 	lecture_fichier(fichier,&tab_train);
+	
+	int k = 1;
+	sprintf(listGare,"%s%s",listGare, tab_train.trains[0].ville_dep);
+	for(int i = 1; i < tab_train.taille;i++){
+		char * c = strstr(listGare, tab_train.trains[i].ville_dep);
+		if(c == NULL){
+			sprintf(listGare,"%s,%s",listGare, tab_train.trains[i].ville_dep);
+			k++;
+		}
+		if(k == 3){
+			sprintf(listGare,"%s\n",listGare);
+			k = 0;
+		}
+	}
+	write(echange,listGare,strlen(listGare)+1);
 	
 	do{
 		int lu = read(echange, tampon, MAX);

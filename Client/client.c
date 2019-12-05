@@ -56,7 +56,7 @@ int main(int argc,char *argv[]){
 		printf("Erreur d'usage : client serveur port\n");
 		exit(1);
 	}
-
+	char listGare[MAX] = "";
 	char arret[MAX] = "Non";
 	char ville_depart[MAX];
 	char ville_arrivee[MAX];
@@ -70,8 +70,10 @@ int main(int argc,char *argv[]){
 	int err;
 
 	int echange = socketClient(argv[1], atoi(argv[2]));
-	printf("Cher utilisateur, bienvenue sur la consultation des trains en ligne.\n");
-	printf("La liste des villes disponibles est: Valence, Grenoble, Montélimar, Paris Gare de Lyon, Marseille, Lyon Part-Dieu et Strasbourg.\n");
+	
+	read(echange, listGare, MAX);
+	printf("\nCher utilisateur, bienvenue sur la consultation des trains en ligne\n");
+	printf("La liste des villes disponibles est: %s.\n\n",listGare);
 	do{
 		msg = "Veuillez indiquer une ville de départ :\n";
 		lectureClient(msg, ville_depart);
@@ -96,9 +98,7 @@ int main(int argc,char *argv[]){
 				lectureClient(msg, horaire);
 				err = horaire_valide(horaire);
 			}
-			msg = "Voulez-vous :\n\tLe trajet au meilleur prix ? (1)\n\tLe trajet de durée optimum ? (2)\n\tTous les trains ? (0)\n";
-			lectureClient(msg, trajet);
-			sprintf(entree,"%s;%s;%s;%s",ville_depart,ville_arrivee,horaire,trajet);
+			sprintf(entree,"%s;%s;%s;0",ville_depart,ville_arrivee,horaire);
 		} else if(strcmp(param,"2") == 0){
 			msg = "Veuillez entrer un horaire de départ minimum : (HH:MM)\n";
 			lectureClient(msg, horaire1);
