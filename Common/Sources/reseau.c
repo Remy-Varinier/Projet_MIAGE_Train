@@ -37,5 +37,9 @@ int socketClient(char nomServeur[], int port){
 	host = gethostbyname("localhost");
 	memcpy(&sin.sin_addr.s_addr,host->h_addr_list[0],sizeof(sin.sin_addr.s_addr));
 	int echange = connect(connection,(struct sockaddr *)&sin,sizeof(sin));
+	if(echange == -1){
+		printf("Impossible d'acceder au serveur (Essayez de changer de port)\n");
+		exit(EXIT_FAILURE);
+	}
 	return connection;
 }
