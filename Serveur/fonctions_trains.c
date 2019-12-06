@@ -96,7 +96,7 @@ struct TabTrain meilleur_prix(struct TabTrain tab_train){
 	int i = 1;
 	struct Train train = tab_train.trains[0];
 	while(i<tab_train.taille){
-		if (train.prix > tab_train.trains[i].prix){
+		if (option(train) > option(tab_train.trains[i])){
 			train = tab_train.trains[i];
 		}
 		i++;
