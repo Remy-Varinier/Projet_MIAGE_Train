@@ -62,7 +62,7 @@ int main(int argc,char *argv[]){
 	
 	// Test si les paramètres serveur et port sont bien passés en paramètre du client
 	if(argc < 3){
-		printf("Erreur d'usage : client serveur port\n");
+		printf("\033[0;31mErreur d'usage : client serveur port\n\033[0m");
 		exit(1);
 	}
 	
@@ -151,7 +151,6 @@ int main(int argc,char *argv[]){
 			lectureClient(msg, trajet);
 			
 			sprintf(entree,"%s;%s;%s;%s;%s",ville_depart,ville_arrivee,horaire1,horaire2,trajet);
-			printf("%s", entree);
 		
 		}else{
 			msg = "\nVoulez-vous :\n\tLe trajet au meilleur prix ? (\033[0;32m1\33[0m)\n\tLe trajet de durée optimum ? (\033[0;32m2\33[0m)\n\tTous les trains ? (\033[0;32m0\33[0m)\n";

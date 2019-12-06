@@ -46,7 +46,7 @@ void fils(int echange){
 	for(int i = 1; i < tab_train.taille;i++){
 		char * c = strstr(listGare, tab_train.trains[i].ville_dep);
 		if(c == NULL){
-			sprintf(listGare,"%s,%s",listGare, tab_train.trains[i].ville_dep);
+			sprintf(listGare,"%s, %s",listGare, tab_train.trains[i].ville_dep);
 			k++;
 		}
 		if(k == 3){
@@ -104,6 +104,13 @@ void fils(int echange){
 }
 
 int main(int argc,char *argv[]){
+	
+	// Test si le paramètre port est bien passé en paramètre du serveur
+	if(argc < 2){
+		printf("\033[0;31mErreur d'usage : serveur port\n\033[0m");
+		exit(1);
+	}
+	
 	pid_t id;
 	int ecoute = socketServeur(atoi(argv[1]));
 	printf("Connexion... \n");
