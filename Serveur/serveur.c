@@ -87,11 +87,13 @@ void fils(int echange){
 					reponse(tab_res, echange);
 					break;
 				case 5:
+					getTrainDepArr(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), decoupe_horaire(commande[3]), &tab_res);
+					
 					if(strcmp(commande[i-1],"2") == 0 )
 						tab_res = duree_optimum(tab_res);
 					else if(strcmp(commande[i-1],"1") == 0 )
 						tab_res = meilleur_prix(tab_res);
-					getTrainDepArr(tab_train, commande[0], commande[1], decoupe_horaire(commande[2]), decoupe_horaire(commande[3]), &tab_res);
+						
 					reponse(tab_res, echange);
 					break;
 			}

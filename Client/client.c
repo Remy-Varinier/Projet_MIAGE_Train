@@ -127,7 +127,7 @@ int main(int argc,char *argv[]){
 			sprintf(entree,"%s;%s;%s;0",ville_depart,ville_arrivee,horaire);
 			
 		} else if(strcmp(param,"2") == 0){
-			msg = "\nVeuillez entrer un horaire de départ minimum : (HH:MM)\n";
+			msg = "\nVeuillez entrer un horaire de départ minimum : (\033[0;32mHH:MM\33[0m)\n";
 			lectureClient(msg, horaire1);
 			err = horaire_valide(horaire1);
 			
@@ -151,6 +151,7 @@ int main(int argc,char *argv[]){
 			lectureClient(msg, trajet);
 			
 			sprintf(entree,"%s;%s;%s;%s;%s",ville_depart,ville_arrivee,horaire1,horaire2,trajet);
+			printf("%s", entree);
 		
 		}else{
 			msg = "\nVoulez-vous :\n\tLe trajet au meilleur prix ? (\033[0;32m1\33[0m)\n\tLe trajet de durée optimum ? (\033[0;32m2\33[0m)\n\tTous les trains ? (\033[0;32m0\33[0m)\n";
